@@ -27,7 +27,7 @@ CREATE TABLE `setting` (
 
 insert  into `setting`(`id`,`name`,`content`) values 
 (1,'web_key','114514'),
-(2,'last_update','2022-08-10 00:06:15'),
+(2,'last_update','2022-08-10 02:14:27'),
 (3,'webdriver_url','https://mail.mkid.top');
 
 /*Table structure for table `tasks` */
@@ -38,14 +38,17 @@ CREATE TABLE `tasks` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `username` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `password` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `tgbot_userid` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  `tgbot_chat_id` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
   `tgbot_token` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
   `wxpusher_uid` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
   `userid` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `tasks` */
+
+insert  into `tasks`(`id`,`username`,`password`,`tgbot_chat_id`,`tgbot_token`,`wxpusher_uid`,`userid`) values 
+(1,'user1','pass1','tgid','tgtoken','wxid',1);
 
 /*Table structure for table `users` */
 

@@ -5,18 +5,18 @@ if (!isset($_GET['id'])) {
     exit;
 } else {
     if (check_task_id_exist($_GET['id'])) {
-        $result = mysqli_fetch_assoc(mysqli_query($conn, "SELECT username,password,tgbot_userid,tgbot_token,wxpusher_uid FROM tasks WHERE id='{$_GET['id']}';"));
+        $result = mysqli_fetch_assoc(mysqli_query($conn, "SELECT username,password,tgbot_chat_id,tgbot_token,wxpusher_uid FROM tasks WHERE id='{$_GET['id']}';"));
         $webdriver = get_setting("webdriver_url");
         $username = $result['username'];
         $password = $result['password'];
-        $tgbot_userid = $result['tgbot_userid'];
+        $tgbot_chat_id = $result['tgbot_chat_id'];
         $tgbot_token = $result['tgbot_token'];
         $wxpusher_uid = $result['wxpusher_uid'];
         $data = array(
             'status' => 'success',
             'username' => $username,
             'password' => $password,
-            'tgbot_userid' => $tgbot_userid,
+            'tgbot_chat_id' => $tgbot_chat_id,
             'tgbot_token' => $tgbot_token,
             'wxpusher_uid' => $wxpusher_uid,
             'webdriver' => $webdriver
