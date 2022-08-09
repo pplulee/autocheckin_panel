@@ -94,3 +94,24 @@ function php_self()
 {
     return substr($_SERVER['PHP_SELF'], strrpos($_SERVER['PHP_SELF'], '/') + 1);
 }
+
+function check_key($key): bool
+{
+    global $conn;
+    return $key==mysqli_fetch_assoc(mysqli_query($conn, "SELECT content FROM setting WHERE name='web_key';"))['content'];
+}
+
+function check_task_id_exist($id): bool
+{
+    global $conn;
+    if (mysqli_num_rows(mysqli_query($conn, "SELECT id FROM tasks WHERE id='$id';")) == 0) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+function update_time(){
+    global $conn;
+    mysqli_query($conn, "UPDATE setting SET content='".get_time()."' WHERE name='last_update';");
+}
