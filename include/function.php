@@ -2,8 +2,7 @@
 function logout()
 {
     $_SESSION['isLogin'] = false;
-    unset($_SESSION['userid']);
-    unset($_SESSION['username']);
+    unset($_SESSION['user_id']);
     exit("<script>alert('You have been successfully logged out');window.location.href='index.php';</script>");
 }
 
@@ -116,4 +115,9 @@ function get_setting($name)
 {
     global $conn;
     return mysqli_fetch_assoc(mysqli_query($conn, "SELECT content FROM setting WHERE name='$name';"))['content'];
+}
+
+function alert($message)
+{
+    echo "<script>alert('{$message}');</script>";
 }

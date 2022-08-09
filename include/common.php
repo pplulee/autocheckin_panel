@@ -3,6 +3,7 @@ header('Content-Type: text/html; charset=UTF-8');
 include $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 include("function.php");
 
+
 //Enable error reporting
 if ($Sys_config["debug"]) {
     ini_set("display_errors", "On");
@@ -19,6 +20,9 @@ if (!(isset($_SESSION["isLogin"]))) {
     $_SESSION["isLogin"] = false;
     $_SESSION["permission"] = 0;
 }
+
+include("user.php");
+include("task.php");
 
 //Initialize CSS
 echo '<!DOCTYPE html>

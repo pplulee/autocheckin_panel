@@ -25,9 +25,8 @@ function startlogin($email, $password)
 {
     $result = login($email, $password);
     if ($result[0]) {
-        $_SESSION["isLogin"] = true;
-        $_SESSION["userid"] = get_id_by_email($email);
-        $_SESSION["email"] = $email;
+        $_SESSION['isLogin'] = true;
+        $_SESSION['user_id'] = get_id_by_email($email);
         echo "<script>window.location.href='index.php';</script>";
     } else {
         echo "<script>alert('$result[1]');window.location.href='login.php';</script>";
