@@ -85,6 +85,11 @@ function isMobile(): bool
     return false;
 }
 
+function email_valid($email)
+{
+    return filter_var($email, FILTER_VALIDATE_EMAIL);
+}
+
 function php_self()
 {
     return substr($_SERVER['PHP_SELF'], strrpos($_SERVER['PHP_SELF'], '/') + 1);

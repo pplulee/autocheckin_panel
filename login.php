@@ -39,11 +39,14 @@ if (isset($_POST['login'])) {
     if ($_POST["email"] == null or $_POST["password"] == null) {
         echo "<script>alert('email or password cannot be empty!');window.location.href='login.php';</script>";
         exit;
-    }  else {
+    } else {
         startlogin($_POST["email"], $_POST["password"]);
     }
 } elseif (isset($_POST['register'])) {
-    if ($_POST["email"] == null or $_POST["password"] == null) {
+    if (!email_valid($_POST["email"])) {
+        echo "<script>alert('Email is invalid!');window.location.href='login.php';</script>";
+        exit;
+    } elseif ($_POST["email"] == null or $_POST["password"] == null) {
         echo "<script>alert('email or password cannot be empty!');window.location.href='login.php';</script>";
         exit;
     } else {
@@ -62,13 +65,14 @@ if (isset($_POST['login'])) {
     <title>Login</title>
 </head>
 <body>
-<div class="container" style="align-self: center; position: relative;width: <?php echo ((isMobile())?"auto":"20%"); ?>;margin-top: 15%">
+<div class="container"
+     style="align-self: center; position: relative;width: <?php echo((isMobile()) ? "auto" : "30%"); ?>;margin-top: 5%">
     <div class="card border-dark">
         <h4 class="card-header bg-primary text-white text-center">登录/注册</h4>
         <div class="card-body" style="margin:0 5% 5% 5%;">
             <form action="login.php" method="post">
                 <div class="input-group mb-3">
-                    <span class="input-group-text" id="username_input"><i class="bi bi-person-fill"></i>账户</span>
+                    <span class="input-group-text" id="username_input"><i class="bi bi-envelope-fill"></i>邮箱</span>
                     <input type="email" name="email" class="form-control" aria-describedby="username_input">
                 </div>
                 <br>
@@ -76,10 +80,10 @@ if (isset($_POST['login'])) {
                     <span class="input-group-text" id="password_input"><i class="bi bi-shield-lock-fill"></i>密码</span>
                     <input type="password" name="password" class="form-control" aria-describedby="password_input">
                 </div>
-                <button name="login" class="login_btn" type="submit">Login</button>
-                <button name="register" class="login_btn" type="submit">Register</button>
+                <button name="login" class="btn btn-primary" type="submit">Login</button>
+                <button name="register" class="btn btn-success" type="submit">Register</button>
             </form>
-            <a href='index.php' class='btn btn-primary' style="margin-top: 10%;">返回首页</a>
+            <a href='index.php' class='btn btn-secondary' style="margin-top: 10%;">返回首页</a>
         </div>
     </div>
 </div>
