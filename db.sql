@@ -27,7 +27,7 @@ CREATE TABLE `setting` (
 
 insert  into `setting`(`id`,`name`,`content`) values 
 (1,'web_key','114514'),
-(2,'last_update','2022-01-01 00:00:00'),
+(2,'last_update','2022-08-10 00:06:15'),
 (3,'webdriver_url','https://mail.mkid.top');
 
 /*Table structure for table `tasks` */
@@ -36,8 +36,8 @@ DROP TABLE IF EXISTS `tasks`;
 
 CREATE TABLE `tasks` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `account` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
-  `password` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  `username` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `password` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `tgbot_userid` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
   `tgbot_token` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
   `wxpusher_uid` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
