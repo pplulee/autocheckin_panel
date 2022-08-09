@@ -10,7 +10,7 @@ function logout()
 function isadmin($email)
 {
     global $conn;
-    if (!isset($email) or $email== "") {
+    if (!isset($email) or $email == "") {
         return false;
     }
     if (mysqli_fetch_assoc(mysqli_query($conn, "SELECT admin FROM users WHERE email='$email';"))['admin'] != 1) {
@@ -34,11 +34,11 @@ function register($email, $password)
 {
     global $conn;
     if (userexist($email)) {
-        return array(false,"Username already exists");
+        return array(false, "Username already exists");
     } else {
         $password = password_hash($password, PASSWORD_DEFAULT);
         mysqli_query($conn, "INSERT INTO users (email, password) VALUES ('$email', '$password');");
-        return array(true,"");
+        return array(true, "");
     }
 }
 
@@ -48,7 +48,8 @@ function get_id_by_email($email)
     return mysqli_fetch_assoc(mysqli_query($conn, "SELECT id FROM users WHERE email='$email';"))['id'];
 }
 
-function get_time(){
+function get_time()
+{
     return date('Y-m-d H:i:s');
 }
 
@@ -95,12 +96,6 @@ function php_self()
     return substr($_SERVER['PHP_SELF'], strrpos($_SERVER['PHP_SELF'], '/') + 1);
 }
 
-function check_key($key): bool
-{
-    global $conn;
-    return $key==mysqli_fetch_assoc(mysqli_query($conn, "SELECT content FROM setting WHERE name='web_key';"))['content'];
-}
-
 function check_task_id_exist($id): bool
 {
     global $conn;
@@ -111,7 +106,14 @@ function check_task_id_exist($id): bool
     }
 }
 
-function update_time(){
+function update_time()
+{
     global $conn;
-    mysqli_query($conn, "UPDATE setting SET content='".get_time()."' WHERE name='last_update';");
+    mysqli_query($conn, "UPDATE setting SET content='" . get_time() . "' WHERE name='last_update';");
+}
+
+function get_setting($name)
+{
+    global $conn;
+    return mysqli_fetch_assoc(mysqli_query($conn, "SELECT content FROM setting WHERE name='$name';"))['content'];
 }

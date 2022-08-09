@@ -1,12 +1,12 @@
 <?php
 include("header.php");
-if (!isset($_GET['id'])){
+if (!isset($_GET['id'])) {
     echo "未提供ID";
     exit;
-}else{
+} else {
     if (check_task_id_exist($_GET['id'])) {
         $result = mysqli_fetch_assoc(mysqli_query($conn, "SELECT username,password,tgbot_userid,tgbot_token,wxpusher_uid FROM tasks WHERE id='{$_GET['id']}';"));
-        $webdriver = mysqli_fetch_assoc(mysqli_query($conn, "SELECT webdriver FROM tasks WHERE name='webdriver';"))["webdriver"];
+        $webdriver = get_setting("webdriver_url");
         $username = $result['username'];
         $password = $result['password'];
         $tgbot_userid = $result['tgbot_userid'];
@@ -21,11 +21,11 @@ if (!isset($_GET['id'])){
             'wxpusher_uid' => $wxpusher_uid,
             'webdriver' => $webdriver
         );
-    }else{
+    } else {
         $data = array(
             'status' => 'fail',
             'message' => 'ID不存在'
         );
     }
-    echo json_encode($data,JSON_UNESCAPED_UNICODE);
+    echo json_encode($data, JSON_UNESCAPED_UNICODE);
 }
