@@ -26,7 +26,7 @@ function register($email, $password)
 {
     global $conn;
     if (userexist($email)) {
-        return array(false, "Username already exists");
+        return array(false, "用户已存在");
     } else {
         $password = password_hash($password, PASSWORD_DEFAULT);
         mysqli_query($conn, "INSERT INTO users (email, password) VALUES ('$email', '$password');");
@@ -98,6 +98,17 @@ function check_task_id_exist($id): bool
     }
 }
 
+function get_user_task_id($id)
+{
+    global $conn;
+    $result = mysqli_query($conn, "SELECT id FROM tasks WHERE userid='$id';");
+    if (mysqli_num_rows($result) == 0) {
+        return -1;
+    } else {
+        return mysqli_fetch_assoc($result)['id'];
+    }
+}
+
 function update_time()
 {
     global $conn;
@@ -114,3 +125,14 @@ function alert($message)
 {
     echo "<script>alert('{$message}');</script>";
 }
+
+function get_notice(){
+    global $conn;
+    $result = mysqli_query($conn, "SELECT content FROM setting WHERE name='notice';");
+    if (mysqli_num_rows($result) == 0) {
+        return "";
+    } else {
+        return mysqli_fetch_assoc($result)['content'];
+    }
+}
+

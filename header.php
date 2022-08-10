@@ -26,6 +26,12 @@ if ((!$_SESSION['isLogin']) && php_self() != "login.php") {
                 <li class="nav-item">
                     <a class="nav-link" href="user_info.php">个人信息</a>
                 </li>
+                <?php if ((isset($_SESSION['user_id']))and(isadmin($_SESSION['user_id']))) {
+                    echo "
+                <li class='nav-item'>
+                    <a class='nav-link' href='/admin'>管理面板</a>
+                </li>";
+                } ?>
             </ul>
             <?php if ($_SESSION['isLogin']) echo '<a href="index.php?logout" class="btn btn-danger">登出</a>' ?>
         </div>
