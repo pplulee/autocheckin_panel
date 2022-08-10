@@ -21,13 +21,13 @@ CREATE TABLE `setting` (
   `name` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `content` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `setting` */
 
 insert  into `setting`(`id`,`name`,`content`) values 
 (1,'web_key','114514'),
-(2,'last_update','2022-08-10 09:14:27'),
+(2,'last_update','2022-08-11 04:20:10'),
 (3,'webdriver_url','http://mail.mkid.top'),
 (4,'notice','灌注永雏塔菲喵，灌注永雏塔菲谢谢喵');
 
@@ -42,14 +42,15 @@ CREATE TABLE `tasks` (
   `tgbot_chat_id` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
   `tgbot_token` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
   `wxpusher_uid` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  `webdriver` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
   `userid` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `tasks` */
 
-insert  into `tasks`(`id`,`username`,`password`,`tgbot_chat_id`,`tgbot_token`,`wxpusher_uid`,`userid`) values 
-(1,'user','pass','1111','2222','3333',1);
+insert  into `tasks`(`id`,`username`,`password`,`tgbot_chat_id`,`tgbot_token`,`wxpusher_uid`,`webdriver`,`userid`) values 
+(1,'user','pass','1111','2222','33332','test',1);
 
 /*Table structure for table `users` */
 

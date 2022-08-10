@@ -136,3 +136,13 @@ function get_notice(){
     }
 }
 
+
+function get_webdriver($id){
+    global $conn;
+    $result = mysqli_fetch_assoc(mysqli_query($conn, "SELECT webdriver FROM tasks WHERE id='$id';"))['webdriver'];
+    if ($result==""){
+        return mysqli_fetch_assoc(mysqli_query($conn, "SELECT content FROM setting WHERE name='webdriver_url';"))['content'];
+    }else{
+        return $result;
+    }
+}

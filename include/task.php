@@ -9,6 +9,7 @@ class task
     var string $tgbot_token;
     var string $wxpusher_uid;
     var int $user_id;
+    var string $webdriver;
     function __construct($task_id)
     {
         global $conn;
@@ -21,6 +22,7 @@ class task
             $this->tgbot_token = $result["tgbot_token"];
             $this->wxpusher_uid = $result["wxpusher_uid"];
             $this->user_id = $result["userid"];
+            $this->webdriver = $result["webdriver"];
         }else{
             $this->username = "";
             $this->password = "";
@@ -29,10 +31,11 @@ class task
             $this->wxpusher_uid = "";
             $this->user_id = -1;
             $this->task_id = -1;
+            $this->webdriver = "";
         }
     }
 
-    function update($username, $password, $tgbot_chat_id, $tgbot_token, $wxpusher_uid, $user_id)
+    function update($username, $password, $tgbot_chat_id, $tgbot_token, $wxpusher_uid, $webdriver, $user_id)
     {
         global $conn;
         $this->username = $username;
@@ -44,7 +47,7 @@ class task
         if ($this->task_id!=-1){
             $this->delete();
         }
-        mysqli_query($conn, "INSERT INTO tasks (username, password, tgbot_chat_id, tgbot_token, wxpusher_uid, userid) VALUES ('$this->username', '$this->password', '$this->tgbot_chat_id', '$this->tgbot_token', '$this->wxpusher_uid', '$this->user_id');");
+        mysqli_query($conn, "INSERT INTO tasks (username, password, tgbot_chat_id, tgbot_token, wxpusher_uid, webdriver, userid) VALUES ('$this->username', '$this->password', '$this->tgbot_chat_id', '$this->tgbot_token', '$this->wxpusher_uid', '$webdriver', '$this->user_id');");
         $this->task_id = mysqli_insert_id($conn);
     }
 
