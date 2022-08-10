@@ -3,20 +3,13 @@ function logout()
 {
     $_SESSION['isLogin'] = false;
     unset($_SESSION['user_id']);
-    exit("<script>alert('You have been successfully logged out');window.location.href='index.php';</script>");
+    exit("<script>alert('已成功注销');window.location.href='index.php';</script>");
 }
 
-function isadmin($email)
+function isadmin($id)
 {
     global $conn;
-    if (!isset($email) or $email == "") {
-        return false;
-    }
-    if (mysqli_fetch_assoc(mysqli_query($conn, "SELECT admin FROM users WHERE email='$email';"))['admin'] != 1) {
-        return false;
-    } else {
-        return true;
-    }
+    return mysqli_fetch_assoc(mysqli_query($conn, "SELECT admin FROM users WHERE id='{$id}';"))["admin"]==1;
 }
 
 function userexist($email)

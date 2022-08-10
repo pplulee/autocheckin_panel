@@ -16,7 +16,7 @@ class user
             $result = mysqli_fetch_assoc($result);
             $this->user_id = $user_id;
             $this->email = $result['email'];
-            $this->is_admin = isadmin($this->email);
+            $this->is_admin = isadmin($this->user_id);
             $result = mysqli_query($conn, "SELECT id FROM tasks WHERE userid='{$this->user_id}';");
             if (mysqli_num_rows($result) == 0) {
                 $this->task_id = -1;
@@ -26,25 +26,26 @@ class user
         }
     }
 
-    function get_id(): int
+    function update($email,$isadmin)
     {
-        return $this->user_id;
+        global $conn;
+        $this->email = $email;
+        $this->is_admin = $isadmin;
+        mysqli_query($conn, "UPDATE users SET email='{$this->email}',isadmin='{$this->is_admin}' WHERE id='{$this->user_id}';");
     }
 
-    function get_email() :string
-    {
-        return $this->email;
-    }
-
-    function get_task_id() :int
-    {
-        return $this->task_id;
-    }
 
     function change_password($password)
     {
         global $conn;
         $password = password_hash($password, PASSWORD_DEFAULT);
         mysqli_query($conn, "UPDATE users SET password='$password' WHERE id='{$this->user_id}';");
+    }
+
+    function delete_account()
+    {
+        global $conn;
+        mysqli_query($conn, "DELETE FROM tasks WHERE userid='{$this->user_id}';");
+        mysqli_query($conn, "DELETE FROM users WHERE id='{$this->user_id}';");
     }
 }

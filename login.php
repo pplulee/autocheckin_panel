@@ -12,12 +12,12 @@ function login($email, $password)
     global $conn;
     if (userexist($email)) {
         if (password_verify($password, mysqli_fetch_assoc(mysqli_query($conn, "SELECT password FROM users WHERE email='{$email}';"))["password"])) {
-            return array(true, "Success");
+            return array(true, "登陆成功");
         } else {
-            return array(false, "Wrong password");
+            return array(false, "密码错误");
         }
     } else {
-        return array(false, "User not exist");
+        return array(false, "用户不存在");
     }
 }
 
@@ -36,24 +36,24 @@ function startlogin($email, $password)
 //Click the login bottom
 if (isset($_POST['login'])) {
     if ($_POST["email"] == null or $_POST["password"] == null) {
-        echo "<script>alert('email or password cannot be empty!');window.location.href='login.php';</script>";
+        echo "<script>alert('邮箱或密码不能为空!');window.location.href='login.php';</script>";
         exit;
     } else {
         startlogin($_POST["email"], $_POST["password"]);
     }
 } elseif (isset($_POST['register'])) {
     if (!email_valid($_POST["email"])) {
-        echo "<script>alert('Email is invalid!');window.location.href='login.php';</script>";
+        echo "<script>alert('邮箱格式错误!');window.location.href='login.php';</script>";
         exit;
     } elseif ($_POST["email"] == null or $_POST["password"] == null) {
-        echo "<script>alert('email or password cannot be empty!');window.location.href='login.php';</script>";
+        echo "<script>alert('邮箱或密码不能为空!');window.location.href='login.php';</script>";
         exit;
     } else {
         $feed = register($_POST["email"], $_POST["password"]);
         if (!$feed[0]) {
             echo "<script>alert('$feed[1]');window.location.href='login.php';</script>";
         } else {
-            echo "<script>alert('Register successfully!');window.location.href='login.php';</script>";
+            echo "<script>alert('注册成功!');window.location.href='login.php';</script>";
         }
 
     }
@@ -79,8 +79,8 @@ if (isset($_POST['login'])) {
                     <span class="input-group-text" id="password_input"><i class="bi bi-shield-lock-fill"></i>密码</span>
                     <input type="password" name="password" class="form-control" aria-describedby="password_input">
                 </div>
-                <button name="login" class="btn btn-primary" type="submit">Login</button>
-                <button name="register" class="btn btn-success" type="submit">Register</button>
+                <button name="login" class="btn btn-primary" type="submit">登录</button>
+                <button name="register" class="btn btn-success" type="submit">注册</button>
             </form>
             <a href='index.php' class='btn btn-secondary' style="margin-top: 10%;">返回首页</a>
         </div>

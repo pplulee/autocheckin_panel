@@ -45,4 +45,11 @@ class task
         mysqli_query($conn, "INSERT INTO tasks (username, password, tgbot_chat_id, tgbot_token, wxpusher_uid, userid) VALUES ('$this->username', '$this->password', '$this->tgbot_chat_id', '$this->tgbot_token', '$this->wxpusher_uid', '$this->user_id')");
         $this->task_id = mysqli_insert_id($conn);
     }
+
+    function delete()
+    {
+        global $conn;
+        mysqli_query($conn, "DELETE FROM tasks WHERE id = '$this->task_id'");
+        $this->task_id = -1;
+    }
 }

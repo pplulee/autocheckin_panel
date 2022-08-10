@@ -21,8 +21,8 @@ if (!(isset($_SESSION["isLogin"]))) {
     $_SESSION["permission"] = 0;
 }
 
-include("user.php");
-include("task.php");
+include($_SERVER['DOCUMENT_ROOT']."/include/user.php");
+include($_SERVER['DOCUMENT_ROOT']."/include/task.php");
 
 //Initialize CSS
 echo '<!DOCTYPE html>
