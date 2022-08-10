@@ -1,7 +1,7 @@
 <?php
 include("header.php");
 $currentuser = new User($_SESSION['user_id']);
-$currenttask = new Task($currentuser->get_task_id());
+$currenttask = new Task($currentuser->task_id);
 if (isset($_POST['submit'])) {
     if (($_POST['username']=="") or (($_POST['password'])=="")){
         alert("请填写用户名和密码");

@@ -5,7 +5,7 @@ class user
     var int $user_id;
     var string $email;
     var int $task_id;
-    var bool $is_admin;
+    var int $is_admin;
     function __construct($user_id)
     {
         global $conn;
@@ -31,9 +31,8 @@ class user
         global $conn;
         $this->email = $email;
         $this->is_admin = $isadmin;
-        mysqli_query($conn, "UPDATE users SET email='{$this->email}',isadmin='{$this->is_admin}' WHERE id='{$this->user_id}';");
+        mysqli_query($conn, "UPDATE users SET email='{$this->email}',admin='{$this->is_admin}' WHERE id='{$this->user_id}';");
     }
-
 
     function change_password($password)
     {

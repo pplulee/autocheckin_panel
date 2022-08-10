@@ -2,7 +2,6 @@
 include("header.php");
 
 if (isset($_POST['submit'])){
-    alert($_POST['userid']);
     $currentuser = new user($_POST['userid']);
     if (($currentuser->user_id)==-1) {
         alert("用户不存在");
@@ -12,6 +11,9 @@ if (isset($_POST['submit'])){
     if (isset($_POST['password'])) {
         $currentuser->change_password($_POST['password']);
     }
+    echo '<div class="alert alert-success" role="alert"><p>保存成功</p></div>';
+    echo '<script>window.setTimeout("window.location=\'user.php\'",800);</script>';
+    exit;
 }
 
 if (isset($_GET['action'])){
@@ -64,8 +66,8 @@ if (isset($_GET['action'])){
             <div class="input-group mb-3">
                 <span class='input-group-text' id='isadmin'>管理员</span>
                     <select class="btn btn-info dropdown-toggle" name="isadmin"  required>
-                        <option value='0'>否</option>
-                        <option value='1' <?php if ($currentuser->is_admin) echo "selected" ?>>是</option>
+                        <option value=0>否</option>
+                        <option value=1 <?php if ($currentuser->is_admin) echo "selected" ?>>是</option>
                     </select>
             </div>
             <input type='hidden' name='userid' value='<?php echo $currentuser->user_id; ?>'>

@@ -6,6 +6,6 @@ if (isset($_GET['logout'])) {
     exit();
 }
 $current_user=new user($_SESSION['user_id']);
-echo "当前用户ID".$current_user->get_id();
-echo "当前用户邮箱".$current_user->get_email();
-echo "当前用户任务ID".$current_user->get_task_id();
+echo "当前用户ID：".$current_user->user_id."<br>";
+echo "当前用户邮箱：".$current_user->email."<br>";
+echo "当前用户任务ID：".$current_user->task_id;
