@@ -60,7 +60,7 @@ if (isset($_GET['action'])) {
             </div>
             <div class="input-group mb-3">
                 <span class='input-group-text' id='name'>密码</span>
-                <input type='text' required class='form-control' name='password' autocomplete='off'
+                <input type='password' required class='form-control' name='password' autocomplete='off'
                        value='<?php echo $currenttask->password; ?>'>
             </div>
             <div class="input-group mb-3">
