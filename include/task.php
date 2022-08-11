@@ -5,7 +5,7 @@ class task
     var int $task_id;
     var string $username;
     var string $password;
-    var string $tgbot_chat_id;
+    var string $tgbot_userid;
     var string $tgbot_token;
     var string $wxpusher_uid;
     var int $user_id;
@@ -18,7 +18,7 @@ class task
             $result = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM tasks WHERE id = '$task_id'"));
             $this->username = $result["username"];
             $this->password = $result["password"];
-            $this->tgbot_chat_id = $result["tgbot_chat_id"];
+            $this->tgbot_userid = $result["tgbot_userid"];
             $this->tgbot_token = $result["tgbot_token"];
             $this->wxpusher_uid = $result["wxpusher_uid"];
             $this->user_id = $result["userid"];
@@ -26,7 +26,7 @@ class task
         }else{
             $this->username = "";
             $this->password = "";
-            $this->tgbot_chat_id = "";
+            $this->tgbot_userid = "";
             $this->tgbot_token = "";
             $this->wxpusher_uid = "";
             $this->user_id = -1;
@@ -35,19 +35,19 @@ class task
         }
     }
 
-    function update($username, $password, $tgbot_chat_id, $tgbot_token, $wxpusher_uid, $webdriver, $user_id)
+    function update($username, $password, $tgbot_userid, $tgbot_token, $wxpusher_uid, $webdriver, $user_id)
     {
         global $conn;
         $this->username = $username;
         $this->password = $password;
-        $this->tgbot_chat_id = $tgbot_chat_id;
+        $this->tgbot_userid = $tgbot_userid;
         $this->tgbot_token = $tgbot_token;
         $this->wxpusher_uid = $wxpusher_uid;
         $this->user_id = $user_id;
         if ($this->task_id!=-1){
             $this->delete();
         }
-        mysqli_query($conn, "INSERT INTO tasks (username, password, tgbot_chat_id, tgbot_token, wxpusher_uid, webdriver, userid) VALUES ('$this->username', '$this->password', '$this->tgbot_chat_id', '$this->tgbot_token', '$this->wxpusher_uid', '$webdriver', '$this->user_id');");
+        mysqli_query($conn, "INSERT INTO tasks (username, password, tgbot_userid, tgbot_token, wxpusher_uid, webdriver, userid) VALUES ('$this->username', '$this->password', '$this->tgbot_userid', '$this->tgbot_token', '$this->wxpusher_uid', '$webdriver', '$this->user_id');");
         $this->task_id = mysqli_insert_id($conn);
     }
 

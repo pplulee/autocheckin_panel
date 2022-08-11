@@ -7,7 +7,7 @@ if (isset($_POST['submit'])) {
         alert("任务不存在");
         exit;
     }
-    $currenttask->update($_POST['username'], $_POST['password'], $_POST['tgbot_chat_id'], $_POST['tgbot_token'], $_POST['wxpusher_uid'], $_POST['webdriver'], $_POST['userid']);
+    $currenttask->update($_POST['username'], $_POST['password'], $_POST['tgbot_userid'], $_POST['tgbot_token'], $_POST['wxpusher_uid'], $_POST['webdriver'], $_POST['userid']);
     echo '<div class="alert alert-success" role="alert"><p>保存成功</p></div>';
     echo '<script>window.setTimeout("window.location=\'tasks.php\'",800);</script>';
     exit;
@@ -65,8 +65,8 @@ if (isset($_GET['action'])) {
             </div>
             <div class="input-group mb-3">
                 <span class='input-group-text' id='name'>Telegram Chat ID</span>
-                <input type='text' class='form-control' name='tgbot_chat_id' placeholder='不需要请留空' autocomplete='off'
-                       value='<?php echo $currenttask->tgbot_chat_id; ?>'>
+                <input type='text' class='form-control' name='tgbot_userid' placeholder='不需要请留空' autocomplete='off'
+                       value='<?php echo $currenttask->tgbot_userid; ?>'>
             </div>
             <div class="input-group mb-3">
                 <span class='input-group-text' id='name'>Telegram Bot Token</span>
