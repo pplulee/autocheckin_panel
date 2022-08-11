@@ -32,7 +32,7 @@ if (isset($_GET['action'])) {
         {
             $currenttask->delete();
             echo '<div class="alert alert-success" role="alert"><p>任务删除成功</p></div>';
-            echo '<script>window.setTimeout("window.location=\'task.php\'",800);</script>';
+            echo '<script>window.setTimeout("window.location=\'tasks.php\'",800);</script>';
             exit;
         }
         default:
