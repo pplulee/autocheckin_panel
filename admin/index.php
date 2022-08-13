@@ -1,5 +1,10 @@
 <?php
 include("header.php");
+if (isset($_GET['logout'])) {
+    logout();
+    echo "<script>window.location.href='index.php';</script>";
+    exit();
+}
 ?>
 <head>
     <title>管理员面板</title>
