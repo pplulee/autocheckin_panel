@@ -31,7 +31,8 @@ include "include/common.php";
         </div>
         <div class="content">
             <div class="inner">
-                <h1>UOM自动签到</h1>
+                <h1>UoM自动签到</h1>
+                <p>UoM AutoCheckin</p>
             </div>
         </div>
         <nav>
@@ -44,7 +45,8 @@ include "include/common.php";
     <div id="main">
         <article id="intro">
             <h2 class="major">简介</h2>
-            <p>さー、UoM Autocheckinを始めましょう！</p>
+            <p>欢迎来到UoM自动签到管理系统，本项目开源于GitHub<br>Welcome to UoM AutoCheckin, this repo is open source on GitHub<br>
+            ようこそUoM AutoCheckinへ、このレポはGitHubでオーペンソースです</p>
         </article>
         <article id="login">
             <?php
@@ -53,6 +55,7 @@ include "include/common.php";
             }
             ?>
             <h2 class="major">登录/注册</h2>
+            <p>非学校账号 若第一次使用本站请先注册</p>
             <form action="login.php" method="post">
                 <div class="field half first">
                     <label for="email">邮箱</label>
@@ -69,7 +72,7 @@ include "include/common.php";
         </article>
     </div>
     <footer id="footer">
-        <p class="copyright">&copy;<?php echo date("Y") ?>
+        <p class="copyright"><?php echo date("Y") ?> &copy; <a href="https://github.com/pplulee/autocheckin_panel" target="_blank" style="text-decoration: none;">本项目开发者</a> 版权所有 |
             <a href="https://github.com/pplulee/autocheckin_panel" rel="noopener" target="_blank">
                 <img style="vertical-align:bottom;height:1.2em;border-radius:0"
                      src="https://img.shields.io/github/stars/pplulee/autocheckin_panel?style=social">
