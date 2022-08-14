@@ -1,4 +1,5 @@
 <?php
+include "include/common.php";
 ?>
 <!DOCTYPE HTML>
 <!--
@@ -36,7 +37,7 @@
         <nav>
             <ul>
                 <li><a href="#intro">简介</a></li>
-                <li><a href="userindex.php">登录/注册</a></li>
+                <li><a href="#login">登录/注册</a></li>
             </ul>
         </nav>
     </header>
@@ -44,6 +45,27 @@
         <article id="intro">
             <h2 class="major">简介</h2>
             <p>さー、UoM Autocheckinを始めましょう！</p>
+        </article>
+        <article id="login">
+            <?php
+            if(isset($_SESSION['isLogin']) and $_SESSION['isLogin']==true){
+                echo "<script>alert('您已登录，自动跳转到用户界面！');window.location.href='userindex.php';</script>";
+            }
+            ?>
+            <h2 class="major">登录/注册</h2>
+            <form action="login.php" method="post">
+                <div class="field half first">
+                    <label for="email">邮箱</label>
+                    <input type="email" name="email" id="email" placeholder="请输入邮箱"/>
+                </div>
+                <div class="field half">
+                    <label for="password">密码</label>
+                    <input type="password" name="password" id="password" placeholder="请输入密码"/>
+                </div>
+                <ul class="actions">
+                    <li><input type="submit" value="登录" class="primary" name="login"/></li>
+                    <li><input type="submit" value="注册" class="primary" name="register"/></li>
+                </ul>
         </article>
     </div>
     <footer id="footer">
@@ -61,9 +83,7 @@
 <script src="/resources/js/util.js"></script>
 <script src="/resources/js/main.js"></script>
 <script>
-    {
-        literal
-    }
+    {literal}
     $(function () {
         $(window).load(function () {
             NProgress.done();
@@ -79,9 +99,7 @@
             NProgress.start();
         });
     });
-    {
-        /literal}
+    {/literal}
 </script>
 </body>
 </html>
-

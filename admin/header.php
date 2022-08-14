@@ -27,7 +27,7 @@ if (!isset($_SESSION['isLogin']) or !isset($_SESSION["user_id"]) or !isadmin($_S
                     <a class="nav-link" href="setting.php">网站设置</a>
                 </li>
             </ul>
-            <?php if ($_SESSION['isLogin']) echo '<a href="userindex.php?logout" class="btn btn-danger">登出</a>' ?>
+            <?php if ($_SESSION['isLogin']) echo '<a href="../userindex.php?logout" class="btn btn-danger">登出</a>' ?>
         </div>
     </div>
 </nav>

@@ -29,31 +29,31 @@ function startlogin($email, $password)
         $_SESSION['user_id'] = get_id_by_email($email);
         echo "<script>window.location.href='userindex.php';</script>";
     } else {
-        echo "<script>alert('$result[1]');window.location.href='login.php';</script>";
+        echo "<script>alert('$result[1]');window.location.href='index.php#login';</script>";
     }
 }
 
 //Click the login bottom
 if (isset($_POST['login'])) {
     if ($_POST["email"] == null or $_POST["password"] == null) {
-        echo "<script>alert('邮箱或密码不能为空!');window.location.href='login.php';</script>";
+        echo "<script>alert('邮箱或密码不能为空!');window.location.href='index.php#login';</script>";
         exit;
     } else {
         startlogin($_POST["email"], $_POST["password"]);
     }
 } elseif (isset($_POST['register'])) {
     if (!email_valid($_POST["email"])) {
-        echo "<script>alert('邮箱格式错误!');window.location.href='login.php';</script>";
+        echo "<script>alert('邮箱格式错误!');window.location.href='index.php#login';</script>";
         exit;
     } elseif ($_POST["email"] == null or $_POST["password"] == null) {
-        echo "<script>alert('邮箱或密码不能为空!');window.location.href='login.php';</script>";
+        echo "<script>alert('邮箱或密码不能为空!');window.location.href='index.php#login';</script>";
         exit;
     } else {
         $feed = register($_POST["email"], $_POST["password"]);
         if (!$feed[0]) {
-            echo "<script>alert('$feed[1]');window.location.href='login.php';</script>";
+            echo "<script>alert('$feed[1]');window.location.href='index.php#login';</script>";
         } else {
-            echo "<script>alert('注册成功!');window.location.href='login.php';</script>";
+            echo "<script>alert('注册成功!');window.location.href='index.php#login';</script>";
         }
 
     }
@@ -66,24 +66,25 @@ if (isset($_POST['login'])) {
 <body>
 <div class="container"
      style="align-self: center; position: relative;width: <?php echo((isMobile()) ? "auto" : "30%"); ?>;margin-top: 5%">
-    <div class="card border-dark">
-        <h4 class="card-header bg-primary text-white text-center">登录/注册</h4>
-        <div class="card-body" style="margin:0 5% 5% 5%;">
-            <form action="login.php" method="post">
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="username_input"><i class="bi bi-envelope-fill"></i>邮箱</span>
-                    <input type="email" name="email" class="form-control" aria-describedby="username_input">
-                </div>
-                <br>
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="password_input"><i class="bi bi-shield-lock-fill"></i>密码</span>
-                    <input type="password" name="password" class="form-control" aria-describedby="password_input">
-                </div>
-                <button name="login" class="btn btn-primary" type="submit">登录</button>
-                <button name="register" class="btn btn-success" type="submit">注册</button>
-            </form>
-            <a href='userindex.php' class='btn btn-secondary' style="margin-top: 10%;">返回首页</a>
-        </div>
-    </div>
+    <h1>这是废弃的登录页面，请<a href="index.php#login" style="text-decoration: none">点击这里</a>回到正常登陆</h1>
+<!--    <div class="card border-dark">-->
+<!--        <h4 class="card-header bg-primary text-white text-center">登录/注册</h4>-->
+<!--        <div class="card-body" style="margin:0 5% 5% 5%;">-->
+<!--            <form action="login.php" method="post">-->
+<!--                <div class="input-group mb-3">-->
+<!--                    <span class="input-group-text" id="username_input"><i class="bi bi-envelope-fill"></i>邮箱</span>-->
+<!--                    <input type="email" name="email" class="form-control" aria-describedby="username_input">-->
+<!--                </div>-->
+<!--                <br>-->
+<!--                <div class="input-group mb-3">-->
+<!--                    <span class="input-group-text" id="password_input"><i class="bi bi-shield-lock-fill"></i>密码</span>-->
+<!--                    <input type="password" name="password" class="form-control" aria-describedby="password_input">-->
+<!--                </div>-->
+<!--                <button name="login" class="btn btn-primary" type="submit">登录</button>-->
+<!--                <button name="register" class="btn btn-success" type="submit">注册</button>-->
+<!--            </form>-->
+<!--            <a href='index.php' class='btn btn-secondary' style="margin-top: 10%;">返回首页</a>-->
+<!--        </div>-->
+<!--    </div>-->
 </div>
 </body>

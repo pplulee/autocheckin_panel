@@ -4,13 +4,13 @@ if (!isset($_SESSION['isLogin'])) {
     $_SESSION['isLogin'] = false;
 }
 if ((!$_SESSION['isLogin']) and (php_self() != "login.php" and php_self() != "index.php")) {
-    echo "<script>window.location.href='login.php';</script>"; // Redirect to login page
+    echo "<script>window.location.href='index.php#login';</script>"; // Redirect to login page
     exit;
 }
 ?>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="index.php">UoM自动签到</a>
+        <a class="navbar-brand" href="userindex.php">UoM自动签到</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -23,7 +23,7 @@ if ((!$_SESSION['isLogin']) and (php_self() != "login.php" and php_self() != "in
                 <?php
                 if ($_SESSION['isLogin']) {
                     echo "<li class='nav-item'>
-                    <a class='nav-link' href='user_index.php'>用户中心</a>
+                    <a class='nav-link' href='userindex.php'>用户中心</a>
                 </li>
                 <li class='nav-item'>
                     <a class='nav-link' href='checkin_manage.php'>管理签到</a>
@@ -43,7 +43,7 @@ if ((!$_SESSION['isLogin']) and (php_self() != "login.php" and php_self() != "in
             <?php if ($_SESSION['isLogin']) {
                 echo '<a href="userindex.php?logout" class="btn btn-danger">登出</a>';
             } else {
-                echo '<a href="login.php" class="btn btn-success">登录</a>';
+                echo '<a href="index.php#login" class="btn btn-success">登录</a>';
             } ?>
         </div>
     </div>
