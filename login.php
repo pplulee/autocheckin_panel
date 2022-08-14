@@ -2,7 +2,7 @@
 include("header.php");
 //If user is already login, exit this page
 if (isset($_SESSION["isLogin"]) and $_SESSION["isLogin"]) {
-    echo "<script>alert('你已登录!');window.location.href='index.php';</script>";
+    echo "<script>alert('你已登录!');window.location.href='userindex.php';</script>";
     exit;
 }
 
@@ -27,7 +27,7 @@ function startlogin($email, $password)
     if ($result[0]) {
         $_SESSION['isLogin'] = true;
         $_SESSION['user_id'] = get_id_by_email($email);
-        echo "<script>window.location.href='index.php';</script>";
+        echo "<script>window.location.href='userindex.php';</script>";
     } else {
         echo "<script>alert('$result[1]');window.location.href='login.php';</script>";
     }
@@ -82,7 +82,7 @@ if (isset($_POST['login'])) {
                 <button name="login" class="btn btn-primary" type="submit">登录</button>
                 <button name="register" class="btn btn-success" type="submit">注册</button>
             </form>
-            <a href='index.php' class='btn btn-secondary' style="margin-top: 10%;">返回首页</a>
+            <a href='userindex.php' class='btn btn-secondary' style="margin-top: 10%;">返回首页</a>
         </div>
     </div>
 </div>

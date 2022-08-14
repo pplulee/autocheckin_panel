@@ -23,11 +23,11 @@ if (isset($_POST['submit'])) {
         <h4 class='card-header bg-primary text-white text-center'>编辑任务</h4>
         <form action='' method='post' style="margin: 20px;">
             <div class="input-group mb-3">
-                <span class='input-group-text' id='name'>用户名</span>
+                <span class='input-group-text' id='name'>UoM Username</span>
                 <input type='text' required class='form-control' name='username' autocomplete='off' value='<?php echo $currenttask->username; ?>'>
             </div>
             <div class="input-group mb-3">
-                <span class='input-group-text' id='name'>密码</span>
+                <span class='input-group-text' id='name'>Password</span>
                 <input type='password' required class='form-control' name='password' autocomplete='off'
                        value='<?php echo $currenttask->password; ?>'>
             </div>

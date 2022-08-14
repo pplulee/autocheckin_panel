@@ -3,7 +3,7 @@ function logout()
 {
     $_SESSION['isLogin'] = false;
     unset($_SESSION['user_id']);
-    exit("<script>alert('已成功注销');window.location.href='index.php';</script>");
+    exit("<script>alert('已成功注销');window.location.href='userindex.php';</script>");
 }
 
 function isadmin($id)
