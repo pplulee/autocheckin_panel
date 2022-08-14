@@ -27,7 +27,7 @@ include "include/common.php";
 <div id="wrapper">
     <header id="header">
         <div class="logo">
-            <span class="icon fa-rocket"></span>
+            <span class="icon fa-clipboard-check"></span>
         </div>
         <div class="content">
             <div class="inner">
