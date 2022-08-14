@@ -1,6 +1,6 @@
 <?php
 include("../include/common.php");
-if (!isset($_SESSION['isLogin']) or !isadmin($_SESSION["user_id"])) {
+if (!isset($_SESSION['isLogin']) or !isset($_SESSION["user_id"]) or !isadmin($_SESSION["user_id"])) {
     echo "<script>window.location.href='../index.php';</script>";
     exit;
 }

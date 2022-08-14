@@ -10,6 +10,15 @@ include("header.php");
         <h3 class="card-header">服务器信息</h3>
         <ul class="list-group">
             <li class="list-group-item">
+                <b>上次访问API时间:</b> <?php echo mysqli_fetch_assoc(mysqli_query($conn,"SELECT content FROM setting WHERE name='last_update'"))['content'] ?>
+            </li>
+            <li class="list-group-item">
+                <b>总任务数:</b> <?php echo mysqli_num_rows(mysqli_query($conn, "SELECT id FROM tasks;")); ?>
+            </li>
+            <li class="list-group-item">
+                <b>总用户数:</b> <?php echo mysqli_num_rows(mysqli_query($conn, "SELECT id FROM users;")); ?>
+            </li>
+            <li class="list-group-item">
                 <b>PHP版本:</b><?php echo phpversion() ?>
                 <?php if (ini_get('safe_mode')) {
                     echo '线程安全';

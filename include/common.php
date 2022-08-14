@@ -9,9 +9,12 @@ if ($Sys_config["debug"]) {
     ini_set("display_errors", "On");
     error_reporting(E_ALL);
 }
-$conn = @mysqli_connect($Sys_config["db_host"], $Sys_config["db_user"], $Sys_config["db_password"], $Sys_config["db_database"]);  //数据库连接
-if (!$conn) {
-    die("数据库连接失败：" . mysqli_connect_error());
+
+if (!isset($conn)) {
+    $conn = @mysqli_connect($Sys_config["db_host"], $Sys_config["db_user"], $Sys_config["db_password"], $Sys_config["db_database"]);  //数据库连接
+    if (!$conn) {
+        die("数据库连接失败：" . mysqli_connect_error());
+    }
 }
 
 //Initialize session
