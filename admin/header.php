@@ -15,9 +15,6 @@ if (!isset($_SESSION['isLogin']) or !isset($_SESSION["user_id"]) or !isadmin($_S
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="../userindex.php">网站首页</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="user.php">用户列表</a>
                 </li>
                 <li class="nav-item">
@@ -25,6 +22,9 @@ if (!isset($_SESSION['isLogin']) or !isset($_SESSION["user_id"]) or !isadmin($_S
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="setting.php">网站设置</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../userindex.php">返回个人中心</a>
                 </li>
             </ul>
             <?php if ($_SESSION['isLogin']) echo '<a href="../userindex.php?logout" class="btn btn-danger">登出</a>' ?>
