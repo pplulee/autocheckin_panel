@@ -19,7 +19,7 @@ if (isset($_POST['submit'])) {
             </div>
             <div class="input-group mb-3">
                 <span class='input-group-text' id='name'>密码</span>
-                <input type='text' class='form-control' name='password' placeholder='不修改请留空'>
+                <input type='password' class='form-control' name='password' placeholder='不修改请留空'>
             </div>
             <input type='submit' class='btn btn-primary' name='submit' value='保存'>
         </form>

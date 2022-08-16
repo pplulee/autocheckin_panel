@@ -42,6 +42,7 @@ function get_id_by_email($email)
 
 function get_time()
 {
+    date_default_timezone_set('Europe/London');
     return date('Y-m-d H:i:s');
 }
 

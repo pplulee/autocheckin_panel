@@ -69,6 +69,7 @@ include "include/common.php";
                     <li><input type="submit" value="登录" class="primary" name="login"/></li>
                     <li><input type="submit" value="注册" class="primary" name="register"/></li>
                 </ul>
+            </form>
         </article>
     </div>
     <footer id="footer">

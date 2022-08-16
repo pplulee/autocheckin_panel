@@ -8,13 +8,12 @@ if (isset($_POST['submit'])) {
     } else {
         $currenttask->update($_POST['username'], $_POST['password'], $_POST['tgbot_userid'], $_POST['tgbot_token'], $_POST['wxpusher_uid'], $_POST['webdriver'], $_SESSION['user_id']);
         alert("任务更新成功");
-        echo "<script>window.location.href='checkin_manage.php';</script>";
+        echo "<script>window.location.href='userindex.php';</script>";
         exit;
     }
 }else if(isset($_POST['delete'])){
     $currenttask->delete();
-    alert("任务删除成功");
-    echo "<script>window.location.href='checkin_manage.php';</script>";
+    echo "<script>window.location.href='userindex.php#checkin';</script>";
     exit;
 }
 ?>
