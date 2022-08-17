@@ -2,7 +2,6 @@
 include("header.php");
 if (isset($_GET['logout'])) {
     logout();
-    echo "<script>window.location.href='index.php';</script>";
     exit();
 }
 $currentuser = new user($_SESSION['user_id']);
@@ -84,7 +83,7 @@ $currenttask = new task($currentuser->task_id);
                     </div>
                     <ul class="actions">
                         <li><input type="submit" value="保存" class="primary" name="submit"/></li>
-                        <li><input type="submit" value="清空" class="primary" name="delete"/></li>
+                        <li><input type="submit" value="删除我的任务" class="primary" name="delete"/></li>
                     </ul>
                 </form>
             </article>

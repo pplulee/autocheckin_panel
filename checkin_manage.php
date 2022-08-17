@@ -13,6 +13,7 @@ if (isset($_POST['submit'])) {
     }
 }else if(isset($_POST['delete'])){
     $currenttask->delete();
+    alert("任务删除成功");
     echo "<script>window.location.href='userindex.php#checkin';</script>";
     exit;
 }
