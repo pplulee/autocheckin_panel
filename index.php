@@ -50,7 +50,7 @@ include "include/common.php";
         </article>
         <article id="login">
             <?php
-            if(isset($_SESSION['isLogin']) and $_SESSION['isLogin']==true){
+            if(isset($_SESSION['isLogin']) and $_SESSION['isLogin']){
                 echo "<script>alert('您已登录，自动跳转到用户界面！');window.location.href='userindex.php';</script>";
             }
             ?>
@@ -66,7 +66,7 @@ include "include/common.php";
                     <input type="password" name="password" id="password" placeholder="请输入密码"/>
                 </div>
                 <ul class="actions">
-                    <li><input type="submit" value="登录" class="primary" name="login"/></li>
+                    <li><input type="submit" value="登录" class="primary special" name="login" /></li>
                     <li><input type="submit" value="注册" class="primary" name="register"/></li>
                 </ul>
             </form>

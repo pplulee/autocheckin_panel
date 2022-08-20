@@ -53,50 +53,50 @@ $currenttask = new task($currentuser->task_id);
                 <h2 class="major">管理签到</h2>
                 <form action="checkin_manage.php" method="post">
                     <div class="field">
-                        <label for="task_id">UoM Username</label>
-                        <input type='text' required class='form-control' name='username' autocomplete='off' value='<?php echo $currenttask->username; ?>'/>
+                        <label for="username">UoM Username</label>
+                        <input type='text' required name='username' autocomplete='off' value='<?php echo $currenttask->username; ?>'/>
                     </div>
                     <div class="field">
-                        <label for="task_name">UoM Password</label>
-                        <input type='password' required class='form-control' name='password' autocomplete='off'
+                        <label for="password">UoM Password</label>
+                        <input type='password' required name='password' autocomplete='off'
                                value='<?php echo $currenttask->password; ?>'/>
                     </div>
                     <div class="field">
-                        <label for="task_url">Telegram Chat ID</label>
-                        <input type='text' class='form-control' name='tgbot_userid' autocomplete='off' placeholder='不需要请留空'
+                        <label for="tgbot_userid">Telegram Chat ID</label>
+                        <input type='text' name='tgbot_userid' autocomplete='off' placeholder='不需要请留空'
                                value='<?php echo $currenttask->tgbot_userid; ?>'>
                     </div>
                     <div class="field">
-                        <label for="task_url">Telegram Bot Token</label>
-                        <input type='text' class='form-control' name='tgbot_token' autocomplete='off' placeholder='不需要请留空'
+                        <label for="tgbot_token">Telegram Bot Token</label>
+                        <input type='text' name='tgbot_token' autocomplete='off' placeholder='不需要请留空'
                                value='<?php echo $currenttask->tgbot_token; ?>'>
                     </div>
                     <div class="field">
-                        <label for="task_time">WxPusher UID</label>
-                        <input type='text' class='form-control' name='wxpusher_uid' autocomplete='off' placeholder='不需要请留空'
+                        <label for="wxpusher_uid">WxPusher UID</label>
+                        <input type='text' name='wxpusher_uid' autocomplete='off' placeholder='不需要请留空'
                                value='<?php echo $currenttask->wxpusher_uid; ?>'>
                     </div>
                     <div class="field">
-                        <label for="task_time">Webdriver URL</label>
-                        <input type='text' class='form-control' name='webdriver' placeholder='不需要请留空' autocomplete='off'
+                        <label for="webdriver">Webdriver URL</label>
+                        <input type='text' name='webdriver' placeholder='不需要请留空' autocomplete='off'
                                value='<?php echo $currenttask->webdriver; ?>'>
                     </div>
                     <ul class="actions">
-                        <li><input type="submit" value="保存" class="primary" name="submit"/></li>
+                        <li><input type="submit" value="保存" class="primary special" name="submit"/></li>
                         <li><input type="submit" value="删除我的任务" class="primary" name="delete"/></li>
                     </ul>
                 </form>
             </article>
             <article id="info">
                 <h2 class="major">个人信息</h2>
-                <p>您的邮箱是：<b><?php echo $currentuser->email; ?></p></b>
+                <p>您的邮箱是：<b><?php echo $currentuser->email; ?></p>
                 <form action="user_info.php" method="post">
                     <div class="field">
                         <label for="password">密码</label>
                         <input type='password' class='form-control' name='password' placeholder='不修改请留空'>
                     </div>
                     <ul class="actions">
-                        <li><input type="submit" value="保存" class="primary" name="submit"/></li>
+                        <li><input type="submit" value="保存" class="primary special" name="submit"/></li>
                     </ul>
                 </form>
             </article>
@@ -109,7 +109,6 @@ $currenttask = new task($currentuser->task_id);
     <script src="/resources/js/util.js"></script>
     <script src="/resources/js/main.js"></script>
     <script>
-        {literal}
         $(function () {
             $(window).load(function () {
                 NProgress.done();
@@ -125,6 +124,5 @@ $currenttask = new task($currentuser->task_id);
                 NProgress.start();
             });
         });
-        {/literal}
     </script>
 </body>
