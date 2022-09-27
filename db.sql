@@ -1,5 +1,5 @@
 /*
-SQLyog Community v13.1.8 (64 bit)
+SQLyog Community v13.1.9 (64 bit)
 MySQL - 8.0.12 : Database - autocheckin
 *********************************************************************
 */
@@ -21,14 +21,15 @@ CREATE TABLE `setting` (
   `name` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `content` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `setting` */
 
 insert  into `setting`(`id`,`name`,`content`) values 
 (1,'web_key','114514'),
 (2,'last_update','2022-08-10 02:14:27'),
-(3,'webdriver_url','https://mail.mkid.top');
+(3,'webdriver_url',''),
+(4,'wxpusher_url','');
 
 /*Table structure for table `tasks` */
 

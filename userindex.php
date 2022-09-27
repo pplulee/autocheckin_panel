@@ -71,9 +71,10 @@ $currenttask = new task($currentuser->task_id);
                         <input type='text' name='tgbot_token' autocomplete='off' placeholder='不需要请留空'
                                value='<?php echo $currenttask->tgbot_token; ?>'>
                     </div>
+
                     <div class="field">
                         <label for="wxpusher_uid">WxPusher UID</label>
-                        <input type='text' name='wxpusher_uid' autocomplete='off' placeholder='不需要请留空'
+                        <input type='text' name='wxpusher_uid' autocomplete='off' placeholder='请点击下方按钮关注获取UID'
                                value='<?php echo $currenttask->wxpusher_uid; ?>'>
                     </div>
                     <div class="field">
@@ -84,6 +85,7 @@ $currenttask = new task($currentuser->task_id);
                     <ul class="actions">
                         <li><input type="submit" value="保存" class="primary special" name="submit"/></li>
                         <li><input type="submit" value="删除我的任务" class="primary" name="delete"/></li>
+                        <a href="<?php echo get_setting("wxpusher_url") ?>" target="_blank"><input type="button" value="关注微信通知中心"></a>
                     </ul>
                 </form>
             </article>

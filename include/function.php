@@ -9,7 +9,7 @@ function logout()
 function isadmin($id)
 {
     global $conn;
-    return mysqli_fetch_assoc(mysqli_query($conn, "SELECT admin FROM users WHERE id='{$id}';"))["admin"]==1;
+    return mysqli_fetch_assoc(mysqli_query($conn, "SELECT admin FROM users WHERE id='{$id}';"))["admin"] == 1;
 }
 
 function userexist($email)
@@ -127,7 +127,8 @@ function alert($message)
     echo "<script>alert('{$message}');</script>";
 }
 
-function get_notice(){
+function get_notice()
+{
     global $conn;
     $result = mysqli_query($conn, "SELECT content FROM setting WHERE name='notice';");
     if (mysqli_num_rows($result) == 0) {
@@ -137,13 +138,3 @@ function get_notice(){
     }
 }
 
-
-function get_webdriver($id){
-    global $conn;
-    $result = mysqli_fetch_assoc(mysqli_query($conn, "SELECT webdriver FROM tasks WHERE id='$id';"))['webdriver'];
-    if ($result==""){
-        return mysqli_fetch_assoc(mysqli_query($conn, "SELECT content FROM setting WHERE name='webdriver_url';"))['content'];
-    }else{
-        return $result;
-    }
-}
