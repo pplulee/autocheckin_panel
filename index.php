@@ -39,6 +39,7 @@ include "include/common.php";
             <ul>
                 <li><a href="#intro">简介</a></li>
                 <li><a href="#login">登录/注册</a></li>
+                <li><a href="#admin">联系我们</a></li>
             </ul>
         </nav>
     </header>
@@ -70,6 +71,18 @@ include "include/common.php";
                     <li><input type="submit" value="注册" class="primary" name="register"/></li>
                 </ul>
             </form>
+        </article>
+        <article id="admin">
+            <h2 class="major">联系我们</h2>
+            <p>
+                当您遇到错误、不会使用、或出现一些奇怪bug之类的时候，欢迎联系我们，我们会尽我们所能帮助您！
+            </p>
+            <p>
+                联系邮箱：<a href="mailto:contact@example.com">contact@example.com</a>
+            </p>
+            <p>
+                Telegram：<a href="https://t.me/example">example</a>
+            </p>
         </article>
     </div>
     <? include "footer.php"; ?>
