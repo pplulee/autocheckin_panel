@@ -48,6 +48,7 @@ include "include/common.php";
             <h2 class="major">简介</h2>
             <p>欢迎来到UoM自动签到管理系统，本项目开源于GitHub<br>Welcome to UoM AutoCheckin, this repo is open source on GitHub<br>
             ようこそUoM AutoCheckinへ、このレポはGitHubでオーペンソースです</p>
+            <p>敬请关注本系统官方Telegram频道(<a href="https://t.me/uom_autocheckin" target="_blank">uom_autocheckin</a>)以获取最新公告</p>
         </article>
         <article id="login">
             <?php
