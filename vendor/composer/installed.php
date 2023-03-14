@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'topthink/think',
-        'pretty_version' => 'v6.1.0',
-        'version' => '6.1.0.0',
-        'reference' => NULL,
+        'pretty_version' => '2.0.x-dev',
+        'version' => '2.0.9999999.9999999-dev',
+        'reference' => '12ee96a6dea9c72ea812a722bfc99724eb601d43',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -128,9 +128,9 @@
             'dev_requirement' => false,
         ),
         'topthink/think' => array(
-            'pretty_version' => 'v6.1.0',
-            'version' => '6.1.0.0',
-            'reference' => NULL,
+            'pretty_version' => '2.0.x-dev',
+            'version' => '2.0.9999999.9999999-dev',
+            'reference' => '12ee96a6dea9c72ea812a722bfc99724eb601d43',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -163,6 +163,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'topthink/think-template' => array(
+            'pretty_version' => 'v2.0.9',
+            'version' => '2.0.9.0',
+            'reference' => '6d25642ae0e306166742fd7073dc7a159e18073c',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../topthink/think-template',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'topthink/think-trace' => array(
             'pretty_version' => 'v1.6',
             'version' => '1.6.0.0',
@@ -171,6 +180,15 @@
             'install_path' => __DIR__ . '/../topthink/think-trace',
             'aliases' => array(),
             'dev_requirement' => true,
+        ),
+        'topthink/think-view' => array(
+            'pretty_version' => 'v1.0.14',
+            'version' => '1.0.14.0',
+            'reference' => 'edce0ae2c9551ab65f9e94a222604b0dead3576d',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../topthink/think-view',
+            'aliases' => array(),
+            'dev_requirement' => false,
         ),
     ),
 );
