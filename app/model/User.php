@@ -33,9 +33,8 @@ class User extends Model
             return false;
         }
         $user = new User();
-        $user->email = $email;
-        $user->password = password_hash($password, PASSWORD_DEFAULT);
-        $user->save();
+        $password = password_hash($password, PASSWORD_DEFAULT);
+        $user->save(['email' => $email, 'password' => $password]);
         return $user;
     }
 
@@ -46,5 +45,24 @@ class User extends Model
             return $user;
         }
         return null;
+    }
+
+    public function updateUser($id,$data): bool
+    {
+        // check user exist
+        $user = $this->where('id', $id)->find();
+        if (!$user) {
+            return false;
+        }else{
+            $email = $data['email'];
+            $password = $data['password'];
+            if ($password != null){
+                $user->update(['password' => password_hash($password, PASSWORD_DEFAULT)]);
+            }
+            if ($user->email != $email){
+                $user->update(['email' => $email]);
+            }
+            return true;
+        }
     }
 }

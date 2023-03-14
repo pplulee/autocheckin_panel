@@ -6,89 +6,65 @@ namespace app\controller;
 use app\BaseController;
 use app\model\User;
 use think\facade\Session;
-use think\Request;
-use think\Response;
 
 class UserController extends BaseController
 {
-    /**
-     * 显示资源列表
-     *
-     * @return Response
-     */
     public function index()
     {
         if (!Session::get('user_id')) {
-            return redirect('/auth/login');
+            return redirect('/user/login');
         }
         $user = new User();
         $user = $user->fetch(Session::get('user_id'));
         return view('user/index', ['user' => $user]);
     }
 
-    /**
-     * 显示创建资源表单页.
-     *
-     * @return Response
-     */
-    public function create()
+    public function login()
     {
-        //
+        $email = $this->request->post('email');
+        $password = $this->request->post('password');
+        $user = new User();
+        if ($this->request->post('login')) {
+            $user = $user->login($email, $password);
+            if ($user) {
+                echo "登录成功";
+                return redirect('/user/index');
+            } else {
+                echo "登录失败";
+                return redirect('/index');
+            }
+        } else if ($this->request->post('register')) {
+            $user = $user->register($email, $password);
+            if ($user) {
+                echo "注册成功";
+                return redirect('/index');
+            } else {
+                echo "注册失败";
+                return redirect('/index');
+            }
+        } else {
+            return view('user/login');
+        }
     }
 
-    /**
-     * 保存新建的资源
-     *
-     * @param Request $request
-     * @return Response
-     */
-    public function save(Request $request)
+
+    public function logout()
     {
-        //
+        Session::delete('user_id');
+        echo "退出成功";
+        return redirect('/index');
     }
 
-    /**
-     * 显示指定的资源
-     *
-     * @param int $id
-     * @return Response
-     */
-    public function read($id)
+    public function update()
     {
-        //
-    }
-
-    /**
-     * 显示编辑资源表单页.
-     *
-     * @param int $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * 保存更新的资源
-     *
-     * @param Request $request
-     * @param int $id
-     * @return Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * 删除指定资源
-     *
-     * @param int $id
-     * @return Response
-     */
-    public function delete($id)
-    {
-        //
+        $email = $this->request->post('email');
+        if ($email == null) {
+            return redirect('/user/index');
+        }
+        $password = $this->request->post('password');
+        $user = new User();
+        $user = $user->fetch(Session::get('user_id'));
+        $user->updateUser(Session::get('user_id'), ['email' => $email, 'password' => $password]);
+        return redirect('/user/index');
     }
 }
