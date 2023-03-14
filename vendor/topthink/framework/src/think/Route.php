@@ -75,7 +75,7 @@ class Route
         // 是否使用控制器后缀
         'controller_suffix'     => false,
         // 默认控制器名
-        'default_controller'    => 'Index',
+        'default_controller'    => 'IndexController',
         // 默认操作名
         'default_action'        => 'index',
         // 操作方法后缀

@@ -261,7 +261,7 @@ class Socket implements LogHandlerInterface
 
         if (empty($this->clientArg)) {
             if (empty($socketLog = $this->app->request->header('socketlog'))) {
-                if (empty($socketLog = $this->app->request->header('User-Agent'))) {
+                if (empty($socketLog = $this->app->request->header('UserController-Agent'))) {
                     return '';
                 }
             }
