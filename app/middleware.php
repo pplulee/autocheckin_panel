@@ -1,10 +1,10 @@
 <?php
-
-declare(strict_types=1);
-
-use App\Application\Middleware\SessionMiddleware;
-use Slim\App;
-
-return function (App $app) {
-    $app->add(SessionMiddleware::class);
-};
+// 全局中间件定义文件
+return [
+    // 全局请求缓存
+    // \think\middleware\CheckRequestCache::class,
+    // 多语言加载
+    // \think\middleware\LoadLangPack::class,
+    // Session初始化
+    // \think\middleware\SessionInit::class
+];

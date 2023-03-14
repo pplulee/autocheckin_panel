@@ -1,61 +1,49 @@
 {
-    "name": "slim/slim-skeleton",
-    "description": "A Slim Framework skeleton application for rapid development",
+    "name": "topthink/think",
+    "description": "the new thinkphp framework",
+    "type": "project",
     "keywords": [
-        "microframework",
-        "rest",
-        "router",
-        "psr7"
+        "framework",
+        "thinkphp",
+        "ORM"
     ],
-    "homepage": "http://github.com/slimphp/Slim-Skeleton",
-    "license": "MIT",
+    "homepage": "https://www.thinkphp.cn/",
+    "license": "Apache-2.0",
     "authors": [
         {
-            "name": "Josh Lockhart",
-            "email": "info@joshlockhart.com",
-            "homepage": "http://www.joshlockhart.com/"
+            "name": "liu21st",
+            "email": "liu21st@gmail.com"
         },
         {
-            "name": "Pierre Berube",
-            "email": "pierre@lgse.com",
-            "homepage": "http://www.lgse.com/"
+            "name": "yunwuxin",
+            "email": "448901948@qq.com"
         }
     ],
     "require": {
-        "php": "^7.4 || ^8.0",
-        "ext-json": "*",
-        "monolog/monolog": "^2.9",
-        "php-di/php-di": "^6.4",
-        "slim/psr7": "^1.6",
-        "slim/slim": "4.*"
+        "php": ">=7.2.5",
+        "topthink/framework": "^6.1.0",
+        "topthink/think-orm": "^2.0",
+        "topthink/think-filesystem": "^1.0"
     },
     "require-dev": {
-        "jangregor/phpstan-prophecy": "^1.0.0",
-        "phpspec/prophecy-phpunit": "^2.0",
-        "phpstan/extension-installer": "^1.2.0",
-        "phpstan/phpstan": "^1.10",
-        "phpunit/phpunit": "^9.6.4",
-        "squizlabs/php_codesniffer": "^3.7"
-    },
-    "config": {
-        "allow-plugins": {
-            "phpstan/extension-installer": true
-        },
-        "process-timeout": 0,
-        "sort-packages": true
+        "symfony/var-dumper": "^4.2",
+        "topthink/think-trace": "^1.0"
     },
     "autoload": {
         "psr-4": {
-            "App\\": "src/"
+            "app\\": "app"
+        },
+        "psr-0": {
+            "": "extend/"
         }
     },
-    "autoload-dev": {
-        "psr-4": {
-            "Tests\\": "tests/"
-        }
+    "config": {
+        "preferred-install": "dist"
     },
     "scripts": {
-        "start": "php -S localhost:8080 -t public",
-        "test": "phpunit"
+        "post-autoload-dump": [
+            "@php think service:discover",
+            "@php think vendor:publish"
+        ]
     }
 }
