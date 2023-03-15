@@ -10,6 +10,7 @@
 // +----------------------------------------------------------------------
 use app\middleware\Admin;
 use app\middleware\Auth;
+use app\middleware\Task;
 use app\middleware\UserIndex;
 use think\facade\Route;
 
@@ -28,6 +29,7 @@ Route::group('user', function () {
 })->middleware(UserIndex::class);
 
 Route::post('/user/login', 'user/login')->middleware(Auth::class);
+Route::post('/user/task', 'task/index')->middleware(Task::class);
 
 // 注册admin
 Route::rule('admin/', 'admin/index')->middleware(UserIndex::class);

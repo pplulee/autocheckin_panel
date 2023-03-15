@@ -43,38 +43,33 @@
         <div id="main">
             <article id="checkin">
                 <h2 class="major">管理签到</h2>
-                <form action="checkin" method="post">
+                <form action="/user/task" method="post">
                     <div class="field">
                         <label for="username">UoM Username</label>
-                        <input type='text' required name='username' autocomplete='off' value=''/>
+                        <input type='text' required name='username' autocomplete='off' value='{$task->username}'/>
                     </div>
                     <div class="field">
                         <label for="password">UoM Password</label>
                         <input type='password' required name='password' autocomplete='off'
-                               value=''/>
+                               value='{$task->password}'/>
                     </div>
                     <div class="field">
-                        <label for="tgbot_userid">Telegram Chat ID</label>
-                        <input type='text' name='tgbot_userid' autocomplete='off' placeholder='不需要请留空'
-                               value=''>
+                        <label for="tgbot_chat_id">Telegram Chat ID</label>
+                        <input type='text' name='tgbot_chat_id' autocomplete='off' placeholder='不需要请留空'
+                               value='{$task->tgbot_chat_id}'>
                     </div>
                     <div class="field">
                         <label for="tgbot_token">Telegram Bot Token</label>
                         <input type='text' name='tgbot_token' autocomplete='off' placeholder='不需要请留空'
-                               value=''>
+                               value='{$task->tgbot_token}'>
                     </div>
                     <div class="field">
                         <label for="wxpusher_uid">WxPusher UID</label>
                         <input type='text' name='wxpusher_uid' autocomplete='off' placeholder='请点击下方按钮关注获取UID'
-                               value=''>
-                    </div>
-                    <div class="field">
-                        <label for="webdriver">Webdriver URL</label>
-                        <input type='text' name='webdriver' placeholder='不需要请留空' autocomplete='off'
-                               value=''>
+                               value='{$task->wxpusher_uid}'>
                     </div>
                     <ul class="actions">
-                        <li><input type="submit" value="保存" class="primary special" name="submit"/></li>
+                        <li><input type="submit" value="保存" class="primary special" name="update"/></li>
                         <li><input type="submit" value="删除我的任务" class="primary" name="delete"/></li>
                         <a href="" target="_blank"><input type="button" value="关注微信通知中心"></a>
                     </ul>

@@ -9,7 +9,7 @@ use app\model\User;
 
 class AdminController extends BaseController
 {
-    public function index()
+    public function index(): \think\response\View
     {
         $setting = new Setting();
         $last_api_time = $setting->getLastUpdate();
