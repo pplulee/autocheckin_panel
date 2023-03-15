@@ -11,7 +11,7 @@ class IndexController extends BaseController
     public function index()
     {
         if (Session::get('user_id')) {
-            return alert("error", "您已登录", "2000", "/user/index");
+            return redirect('/user/index');
         }
         return view('index', [
             'enable_register' => env('enable_register')]);
