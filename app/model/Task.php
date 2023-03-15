@@ -30,14 +30,12 @@ class Task extends Model
         $tgbot_userid = $data['tgbot_chat_id'];
         $tgbot_token = $data['tgbot_token'];
         $wxpusher_uid = $data['wxpusher_uid'];
-        $webdriver_url = $data['webdriver_url'];
         $userid = $data['userid'];
         $task->save(['username' => $username,
                      'password' => $password,
                      'tgbot_chat_id' => $tgbot_userid,
                      'tgbot_token' => $tgbot_token,
                      'wxpusher_uid' => $wxpusher_uid,
-                     'webdriver_url' => $webdriver_url,
                      'userid' => $userid]);
         return true;
     }
@@ -54,14 +52,12 @@ class Task extends Model
             $tgbot_userid = $data['tgbot_chat_id'];
             $tgbot_token = $data['tgbot_token'];
             $wxpusher_uid = $data['wxpusher_uid'];
-            $webdriver_url = $data['webdriver_url'];
             $userid = $data['userid'];
             $task->update(['username' => $username,
                            'password' => $password,
                            'tgbot_chat_id' => $tgbot_userid,
                            'tgbot_token' => $tgbot_token,
                            'wxpusher_uid' => $wxpusher_uid,
-                           'webdriver_url' => $webdriver_url,
                            'userid' => $userid]);
             return true;
         }
