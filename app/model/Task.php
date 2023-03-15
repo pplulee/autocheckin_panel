@@ -13,7 +13,7 @@ class Task extends Model
     protected $table = 'tasks';
     protected $pk = 'id';
 
-    public function fetch($id): Task
+    public function fetch($id)
     {
         $task = $this->where('id', $id)->find();
         return $task;

@@ -30,4 +30,14 @@ class Setting extends Model
             $setting->save(['name' => $key, 'content' => $value]);
         }
     }
+
+    public function getNotice()
+    {
+        $setting = $this->where('name', 'notice')->find();
+        if ($setting) {
+            return $setting->content;
+        } else {
+            return null;
+        }
+    }
 }
