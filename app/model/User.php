@@ -5,6 +5,7 @@ namespace app\model;
 
 use think\facade\Session;
 use think\Model;
+use think\facade\Db;
 
 /**
  * @mixin \think\Model
@@ -64,5 +65,24 @@ class User extends Model
             }
             return true;
         }
+    }
+
+    function isAdmin($user_id){
+        $user = $this->fetch($user_id);
+        if ($user->where('id', $user_id)->value('admin') == 1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    function numOfUsers(){
+        return $this->count();
+    }
+
+    function MySQLVersion(){
+        $version = Db::query('select VERSION() as version');
+        $version = $version[0]['version'];
+        return empty($version)?L('Unknown'):$version;
     }
 }
