@@ -11,11 +11,11 @@ class UserController extends BaseController
 {
     public function index()
     {
-        if (!Session::get('user_id')) {
-            return redirect('/index');
-        }
         $user = new User();
         $user = $user->fetch(Session::get('user_id'));
+        if (!$user) {
+            return alert("error", "用户不存在", "2000", "/index");
+        }
         return view('/user/index', ['user' => $user]);
     }
 
@@ -23,9 +23,6 @@ class UserController extends BaseController
     {
         $email = $this->request->post('email');
         $password = $this->request->post('password');
-        if ($email == null || $password == null) {
-            return alert("error", "用户名或密码不能为空", "2000", "/index");
-        }
         $user = new User();
         if ($this->request->post('login')) {
             $user = $user->login($email, $password);
@@ -55,11 +52,9 @@ class UserController extends BaseController
 
     public function update()
     {
+        if (!$this->request->post('email'))
+            return alert("error", "邮箱不能为空", "2000", "/user/index");
         $email = $this->request->post('email');
-        // 需要改进验证方法
-//        if ($email == null) {
-//            return redirect('/user/index');
-//        }
         $password = $this->request->post('password');
         $user = new User();
         $user = $user->fetch(Session::get('user_id'));

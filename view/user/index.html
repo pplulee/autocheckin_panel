@@ -33,8 +33,10 @@
                 <ul>
                     <li><a href="#checkin">管理签到</a></li>
                     <li><a href="#info">个人信息</a></li>
+                    {if $user->admin}
                     <li><a href='/admin'>管理面板</a></li>
-                    <li><a href="logout">退出登录</a></li>
+                    {/if}
+                    <li><a href="/user/logout">退出登录</a></li>
                 </ul>
             </nav>
         </header>

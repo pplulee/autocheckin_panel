@@ -1,19 +1,21 @@
 <?php
-declare (strict_types = 1);
+declare (strict_types=1);
 
 namespace app\model;
 
+use think\facade\Db;
 use think\facade\Session;
 use think\Model;
-use think\facade\Db;
 
 /**
- * @mixin \think\Model
+ * @mixin Model
  */
 class User extends Model
 {
     protected $table = 'users';
     protected $pk = 'id';
+
+    private bool $is_admin = false;
 
     public function login($email, $password)
     {
@@ -39,50 +41,46 @@ class User extends Model
         return $user;
     }
 
-    public function fetch($id)
-    {
-        $user = $this->where('id', $id)->find();
-        if ($user) {
-            return $user;
-        }
-        return null;
-    }
-
-    public function updateUser($id,$data): bool
+    public function updateUser($id, $data): bool
     {
         // check user exist
-        $user = $this->where('id', $id)->find();
+        $user = $this->fetch($id);
         if (!$user) {
             return false;
-        }else{
+        } else {
             $email = $data['email'];
             $password = $data['password'];
-            if ($password != null){
+            if ($password != null) {
                 $user->update(['password' => password_hash($password, PASSWORD_DEFAULT)]);
             }
-            if ($user->email != $email){
+            if ($user->email != $email) {
                 $user->update(['email' => $email]);
             }
             return true;
         }
     }
 
-    function isAdmin($user_id){
-        $user = $this->fetch($user_id);
-        if ($user->where('id', $user_id)->value('admin') == 1){
-            return true;
-        }else{
-            return false;
-        }
+    public function fetch($id)
+    {
+        $user = $this->where('id', $id)->find();
+        return $user;
     }
 
-    function numOfUsers(){
+    function isAdmin($user_id)
+    {
+        $user = $this->fetch($user_id);
+        return ($user && $user->admin);
+    }
+
+    function numOfUsers()
+    {
         return $this->count();
     }
 
-    function MySQLVersion(){
+    function MySQLVersion()
+    {
         $version = Db::query('select VERSION() as version');
         $version = $version[0]['version'];
-        return empty($version)?L('Unknown'):$version;
+        return empty($version) ? L('Unknown') : $version;
     }
 }
