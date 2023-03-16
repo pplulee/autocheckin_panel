@@ -4,9 +4,9 @@ declare (strict_types=1);
 namespace app\controller;
 
 use app\BaseController;
+use app\model\Setting;
 use app\model\Task;
 use app\model\User;
-use app\model\Setting;
 use think\facade\Session;
 
 class UserController extends BaseController
@@ -19,7 +19,7 @@ class UserController extends BaseController
             return alert("error", "用户不存在", "2000", "/index");
         }
         $setting = new Setting();
-        $notice = $setting->getNotice();
+        $notice = $setting->getSetting('notice');
         $task = new Task();
         $task = $task->fetchByUser(Session::get('user_id'));
         return view('/user/index', ['user' => $user, 'task' => $task, 'notice' => $notice]);
@@ -48,7 +48,6 @@ class UserController extends BaseController
             return alert("error", "未知错误", "2000", "/index");
         }
     }
-
 
     public function logout(): string
     {

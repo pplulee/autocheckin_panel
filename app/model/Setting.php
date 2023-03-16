@@ -1,5 +1,5 @@
 <?php
-declare (strict_types = 1);
+declare (strict_types=1);
 
 namespace app\model;
 
@@ -31,13 +31,14 @@ class Setting extends Model
         }
     }
 
-    public function getNotice()
+    public function getSetting($key)
     {
-        $setting = $this->where('name', 'notice')->find();
+        $setting = $this->where('name', $key)->find();
         if ($setting) {
             return $setting->content;
         } else {
             return null;
         }
     }
+
 }

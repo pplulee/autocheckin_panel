@@ -5,8 +5,9 @@ namespace app\controller;
 
 use app\BaseController;
 use app\model\Setting;
-use app\model\User;
 use app\model\Task;
+use app\model\User;
+use think\response\Json;
 use think\response\View;
 
 class AdminController extends BaseController
@@ -17,7 +18,7 @@ class AdminController extends BaseController
         $user = new User();
         $task = new Task();
         $taskCount = $task->numOfTasks();
-        $last_api_time = $setting->getLastUpdate();
+        $last_api_time = $setting->getSetting('last_update');
         $version = $user->MySQLVersion();
         $userCount = $user->numOfUsers();
         return view('/admin/index', ['last_api_time' => $last_api_time,
@@ -46,28 +47,28 @@ class AdminController extends BaseController
     {
         $user = new User();
         $user = $user->fetch($id);
-        if (!$user){
+        if (!$user) {
             return alert("error", "用户不存在", "2000", "/admin/user");
         }
         return view('/admin/userDetail', ['user' => $user]);
     }
 
-    public function userUpdate($id)
+    public function userUpdate($id): string
     {
         $data = $this->request->post();
-        $data['admin'] = $this->request->post('admin')=="on";
+        $data['admin'] = $this->request->post('admin') == "on";
         $user = new User();
-        if (!$user->updateUser($data)){
+        if (!$user->updateUser($data)) {
             return alert("error", "用户不存在", "2000", "/admin/user");
         }
         return alert("success", "修改成功", "2000", "/admin/user");
     }
 
-    public function userDelete($id)
+    public function userDelete($id): Json
     {
         // Method: DELETE
         $user = new User();
-        if (!$user->deleteUser($id)){
+        if (!$user->deleteUser($id)) {
             return json(['status' => 'error', 'msg' => '用户不存在']);
         }
         return json(['status' => 'success', 'msg' => '删除成功']);
@@ -77,17 +78,17 @@ class AdminController extends BaseController
     {
         $task = new Task();
         $task = $task->fetch($id);
-        if (!$task){
+        if (!$task) {
             return alert("error", "任务不存在", "2000", "/admin/task");
         }
         return view('/admin/taskDetail', ['task' => $task]);
     }
 
-    public function taskUpdate($id)
+    public function taskUpdate($id): string
     {
         $data = $this->request->post();
         $task = new Task();
-        if (!$task->updateTask($id,$data)){
+        if (!$task->updateTask($id, $data)) {
             return alert("error", "任务不存在", "2000", "/admin/task");
         }
         return alert("success", "修改成功", "2000", "/admin/task");
@@ -97,7 +98,7 @@ class AdminController extends BaseController
     {
         // Method: DELETE
         $task = new Task();
-        if (!$task->deleteTask($id)){
+        if (!$task->deleteTask($id)) {
             return json(['status' => 'error', 'msg' => '任务不存在']);
         }
         return json(['status' => 'success', 'msg' => '删除成功']);
