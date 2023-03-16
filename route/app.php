@@ -36,4 +36,5 @@ Route::rule('admin/', 'admin/index')->middleware(UserIndex::class);
 Route::group('admin', function () {
     Route::rule('/', 'admin/index');
     Route::get('index', 'admin/index');
+    Route::get('user', 'admin/user');
 })->middleware(Admin::class);

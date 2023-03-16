@@ -65,6 +65,11 @@ class User extends Model
         $user = $this->where('id', $id)->find();
         return $user;
     }
+    public function fetchAll()
+    {
+        $users = $this->select();
+        return $users;
+    }
 
     function isAdmin($user_id)
     {

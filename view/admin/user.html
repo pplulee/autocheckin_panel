@@ -1,0 +1,75 @@
+{include file="admin/header"}
+<title>用户管理</title>
+<div class="container" style="padding-top:70px;">
+    <div class="col-md-12 center-block" style="float: none;">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>邮箱</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {volist name="users" id="user"}
+                <tr>
+                    <td>{$user->id}</td>
+                    <td>{$user->email}</td>
+                    <td><a href='/admin/user/{$user->id}/edit' class='btn btn-secondary'>编辑</a>
+                        <button class="btn btn-danger delete-button" data-id="{$user->id}">删除</button>
+                    </td>
+                </tr>
+                {/volist}
+                </tbody>
+            </table>
+            {$page|raw}
+        </div>
+    </div>
+</div>
+<script>
+    // 获取所有的删除按钮
+    var deleteButtons = document.querySelectorAll('.delete-button');
+
+    // 遍历每个删除按钮，并为它们添加点击事件监听器
+    deleteButtons.forEach(function(deleteButton) {
+        deleteButton.addEventListener('click', function() {
+            var id = this.getAttribute('data-id');
+            confirmDelete(id);
+        });
+    });
+
+    function confirmDelete(id) {
+        Swal.fire({
+            title: '确认删除',
+            text: '您确定要删除这个项目吗？此操作无法撤消。',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: '确认',
+            cancelButtonText: '取消',
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            reverseButtons: true
+        })
+        .then((result) => {
+            if (result.isConfirmed) {
+                // 用户点击了“确认”按钮
+                $.ajax({
+                    url: + id + '/delete/' ,
+                    type: 'DELETE',
+                    success: function(result) {
+                        Swal.fire('删除成功', '', 'success');
+                        // TODO: 处理删除成功后的逻辑
+                    },
+                    error: function(xhr, status, error) {
+                        Swal.fire('删除失败', error, 'error');
+                        // TODO: 处理删除失败后的逻辑
+                    }
+                });
+            } else if (result.isDenied) {
+                // 用户点击了“取消”按钮
+                Swal.fire('已取消删除');
+            }
+        });
+    }
+</script>
