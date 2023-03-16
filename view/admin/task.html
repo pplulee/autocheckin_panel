@@ -18,7 +18,7 @@
                     <td>{$task->id}</td>
                     <td>{$task->username}</td>
                     <td>{$task->userid}</td>
-                    <td><a href='/admin/task/{$task->id}/edit' class='btn btn-secondary'>编辑</a>
+                    <td><a class='btn btn-secondary' href='/admin/task/{$task->id}'>编辑</a>
                         <button class="btn btn-danger delete-button" data-id="{$task->id}">删除</button>
                     </td>
                 </tr>
@@ -30,48 +30,66 @@
     </div>
 </div>
 <script>
-    // 获取所有的删除按钮
+    // 找到所有带有.delete-user类名的按钮
     var deleteButtons = document.querySelectorAll('.delete-button');
+    // 遍历所有按钮并为每个按钮添加一个点击事件监听器
+    deleteButtons.forEach(function (button) {
+        button.addEventListener('click', function () {
+            // 获取该按钮的data-id属性，即任务ID
+            var taskId = button.getAttribute('data-id');
 
-    // 遍历每个删除按钮，并为它们添加点击事件监听器
-    deleteButtons.forEach(function(deleteButton) {
-        deleteButton.addEventListener('click', function() {
-            var id = this.getAttribute('data-id');
-            confirmDelete(id);
+            // 显示SweetAlert2确认弹窗
+            Swal.fire({
+                title: '您确定要删除该任务吗？',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: '确认删除',
+                cancelButtonText: '取消'
+            }).then(function (result) {
+                // 如果用户点击了“确认”按钮，则向服务器发送DELETE请求
+                if (result.value) {
+                    // 发送DELETE请求
+                    fetch('/admin/task/' + taskId, {
+                        method: 'DELETE'
+                    }).then(function (response) {
+                        // 处理服务器响应
+                        if (response.ok) {
+                            // 解析响应数据
+                            return response.json();
+                        } else {
+                            // 如果删除失败，显示SweetAlert2错误提示框
+                            throw new Error('HTTP error ' + response.status);
+                        }
+                    }).then(data => {
+                        if (data.status === 'success') {
+                            // 如果删除成功，显示SweetAlert2成功提示框
+                            Swal.fire({
+                                title: '已成功删除！',
+                                confirmButtonText: '确定',
+                                icon: 'success'
+                            }).then(function (result) {
+                                // 如果用户点击了“确定”按钮，则刷新页面
+                                if (result.value) {
+                                    location.reload();
+                                }
+                            });
+                            setTimeout(function () {
+                                location.reload();
+                            }, 2000);
+                        } else {
+                            // 如果删除失败，显示SweetAlert2错误提示框
+                            throw new Error(data.msg);
+                        }
+                    }).catch(error => {
+                        // 处理错误
+                        Swal.fire({
+                            title: error.message,
+                            text: error.toString(),
+                            icon: 'error'
+                        });
+                    });
+                }
+            });
         });
     });
-
-    function confirmDelete(id) {
-        Swal.fire({
-            title: '确认删除',
-            text: '您确定要删除这个项目吗？此操作无法撤消。',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: '确认',
-            cancelButtonText: '取消',
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#3085d6',
-            reverseButtons: true
-        })
-        .then((result) => {
-            if (result.isConfirmed) {
-                // 用户点击了“确认”按钮
-                $.ajax({
-                    url: + id + '/delete/' ,
-                    type: 'DELETE',
-                    success: function(result) {
-                        Swal.fire('删除成功', '', 'success');
-                        // TODO: 处理删除成功后的逻辑
-                    },
-                    error: function(xhr, status, error) {
-                        Swal.fire('删除失败', error, 'error');
-                        // TODO: 处理删除失败后的逻辑
-                    }
-                });
-            } else if (result.isDenied) {
-                // 用户点击了“取消”按钮
-                Swal.fire('已取消删除');
-            }
-        });
-    }
 </script>
