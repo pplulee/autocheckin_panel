@@ -39,4 +39,35 @@ class AdminController extends BaseController
         $page = $taskList->render();
         return view('/admin/task', ['tasks' => $taskList, 'page' => $page]);
     }
+
+    public function userDetail($id)
+    {
+        $user = new User();
+        $user = $user->fetch($id);
+        if (!$user){
+            return alert("error", "用户不存在", "2000", "/admin/user");
+        }
+        return view('/admin/userDetail', ['user' => $user]);
+    }
+
+    public function userUpdate($id)
+    {
+        $data = $this->request->post();
+        $data['admin'] = $this->request->post('admin')=="on";
+        $user = new User();
+        if (!$user->updateUser($data)){
+            return alert("error", "用户不存在", "2000", "/admin/user");
+        }
+        return alert("success", "修改成功", "2000", "/admin/user");
+    }
+
+    public function userDelete($id)
+    {
+        // Method: DELETE
+        $user = new User();
+        if (!$user->deleteUser($id)){
+            return json(['status' => 'error', 'msg' => '用户不存在']);
+        }
+        return json(['status' => 'success', 'msg' => '删除成功']);
+    }
 }

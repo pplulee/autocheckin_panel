@@ -41,22 +41,53 @@ class User extends Model
         return $user;
     }
 
-    public function updateUser($id, $data): bool
+    public function updateUser($data): bool
     {
-        // check user exist
-        $user = $this->fetch($id);
+        $id = $data['id'];
+        $email = $data['email'];
+        $password = $data['password'];
+        $admin = $data['admin'];
+        // 如果已经设置信息，则不再查询数据库
+        if (!$this) {
+            $user = new User();
+            $user = $user->fetch($id);
+        } else {
+            $user = $this;
+        }
+        echo $this;
         if (!$user) {
             return false;
         } else {
-            $email = $data['email'];
-            $password = $data['password'];
+            $update = [];
             if ($password != null) {
-                $user->update(['password' => password_hash($password, PASSWORD_DEFAULT)]);
+                $update['password'] = password_hash($password, PASSWORD_DEFAULT);
             }
             if ($user->email != $email) {
-                $user->update(['email' => $email]);
+                $update['email'] = $email;
+            }
+            if ($user->admin != $admin) {
+                $update['admin'] = $admin;
+            }
+            if (count($update) > 0) {
+                $user->update($update, ['id' => $id]);
             }
             return true;
+        }
+    }
+
+    public function deleteUser($id)
+    {
+        $user = new User();
+        $user = $user->fetch($id);
+        if (!$user) {
+            return false;
+        } else {
+            $task = new Task();
+            $task = $task->fetchByUser($id);
+            if ($task) {
+                $task->delete();
+            }
+            return $user->delete();
         }
     }
 
@@ -65,6 +96,7 @@ class User extends Model
         $user = $this->where('id', $id)->find();
         return $user;
     }
+
     public function fetchAll()
     {
         $users = $this->select();

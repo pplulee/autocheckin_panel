@@ -36,6 +36,9 @@ Route::rule('admin/', 'admin/index')->middleware(UserIndex::class);
 Route::group('admin', function () {
     Route::rule('/', 'admin/index');
     Route::get('index', 'admin/index');
+    Route::delete('user/:id', 'admin/userDelete');
+    Route::get('user/:id', 'admin/userDetail');
+    Route::post('user/:id', 'admin/userUpdate');
     Route::get('user', 'admin/user');
     Route::get('task', 'admin/task');
 })->middleware(Admin::class);
