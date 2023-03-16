@@ -37,4 +37,5 @@ Route::group('admin', function () {
     Route::rule('/', 'admin/index');
     Route::get('index', 'admin/index');
     Route::get('user', 'admin/user');
+    Route::get('task', 'admin/task');
 })->middleware(Admin::class);
