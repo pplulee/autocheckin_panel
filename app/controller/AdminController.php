@@ -14,12 +14,14 @@ class AdminController extends BaseController
     public function index(): View
     {
         $setting = new Setting();
-        $last_api_time = $setting->getLastUpdate();
         $user = new User();
+        $task = new Task();
+        $taskCount = $task->numOfTasks();
+        $last_api_time = $setting->getLastUpdate();
         $version = $user->MySQLVersion();
         $userCount = $user->numOfUsers();
         return view('/admin/index', ['last_api_time' => $last_api_time,
-            'userCount' => $userCount, 'version' => $version]);
+            'userCount' => $userCount, 'version' => $version, 'taskCount' => $taskCount]);
     }
 
     public function user(): View

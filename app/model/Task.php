@@ -19,6 +19,11 @@ class Task extends Model
         return $task;
     }
 
+    public function numOfTasks()
+    {
+        return $this->count();
+    }
+
     public function fetchByUser($userid): Task
     {
         $task = $this->where('userid', $userid)->find();

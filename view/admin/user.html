@@ -61,35 +61,22 @@
                     }).then(data => {
                         if (data.status === 'success') {
                             // 如果删除成功，显示SweetAlert2成功提示框
-                            return Swal.fire({
+                            Swal.fire({
                                 title: '已成功删除！',
                                 confirmButtonText: '确定',
                                 icon: 'success'
-                            });
-                        } else {
-                            // 如果删除失败，显示SweetAlert2错误提示框
-                            throw new Error('删除用户时出错了');
-                        }
-                    }).then(result => {
-                        // 处理SweetAlert2的响应
-                        return Promise.race([
-                            new Promise(resolve => {
-                                if (typeof result.then === 'function') {
-                                    result.then((result) => resolve(result.isConfirmed));
-                                } else {
-                                    resolve(result.isConfirmed);
+                            }).then(function (result) {
+                                // 如果用户点击了“确定”按钮，则刷新页面
+                                if (result.value) {
+                                    location.reload();
                                 }
-                            }),
-                            new Promise(resolve => setTimeout(() => resolve(false), 2000))
-                        ]);
-                    }).then(isConfirmed => {
-                        // 如果用户点击了确定按钮，立即刷新页面；否则，等待2秒后刷新页面
-                        if (typeof isConfirmed === 'boolean') {
-                            setTimeout(() => {
+                            });
+                            setTimeout(function () {
                                 location.reload();
                             }, 2000);
                         } else {
-                            location.reload();
+                            // 如果删除失败，显示SweetAlert2错误提示框
+                            throw new Error(data.msg);
                         }
                     }).catch(error => {
                         // 处理错误
