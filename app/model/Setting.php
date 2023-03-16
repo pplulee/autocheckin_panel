@@ -20,17 +20,6 @@ class Setting extends Model
         }
     }
 
-    public function setSetting($key, $value)
-    {
-        $setting = $this->where('name', $key)->find();
-        if ($setting) {
-            $setting->update(['content' => $value]);
-        } else {
-            $setting = new Setting();
-            $setting->save(['name' => $key, 'content' => $value]);
-        }
-    }
-
     public function getSetting($key)
     {
         $setting = $this->where('name', $key)->find();
@@ -41,4 +30,31 @@ class Setting extends Model
         }
     }
 
+    public function getAllSetting()
+    {
+        $setting = $this->select();
+        if ($setting) {
+            return $setting;
+        } else {
+            return null;
+        }
+    }
+
+    public function updateSetting($data)
+    {
+        foreach ($data as $key => $value) {
+            $this->setSetting($key, $value);
+        }
+    }
+
+    public function setSetting($key, $value)
+    {
+        $setting = $this->where('name', $key)->find();
+        if ($setting) {
+            $setting->update(['content' => $value], ['name' => $key]);
+        } else {
+            $setting = new Setting();
+            $setting->save(['name' => $key, 'content' => $value]);
+        }
+    }
 }

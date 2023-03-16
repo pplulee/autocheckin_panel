@@ -103,4 +103,19 @@ class AdminController extends BaseController
         }
         return json(['status' => 'success', 'msg' => '删除成功']);
     }
+
+    public function settingDetail()
+    {
+        $setting = new Setting();
+        $setting = $setting->getAllSetting();
+        return view('/admin/setting', ['setting' => $setting]);
+    }
+
+    public function settingUpdate()
+    {
+        $data = $this->request->post();
+        $setting = new Setting();
+        $setting->updateSetting($data['setting']);
+        return alert("success", "修改成功", "2000", "/admin/setting");
+    }
 }

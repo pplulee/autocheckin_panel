@@ -44,4 +44,6 @@ Route::group('admin', function () {
     Route::get('task/:id', 'admin/taskDetail');
     Route::post('task/:id', 'admin/taskUpdate');
     Route::get('task', 'admin/task');
+    Route::get('setting', 'admin/settingDetail');
+    Route::post('setting', 'admin/settingUpdate');
 })->middleware(Admin::class);

@@ -1,0 +1,31 @@
+<title>网站设置</title>
+<div class="container" style="padding-top:70px;">
+    <div class="col-md-12 center-block" style="float: none;">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>名称</th>
+                    <th>内容</th>
+                </tr>
+                </thead>
+                <tbody>
+                <form action='' method='post'>
+                    {volist name="setting" id="setting"}
+                    <tr>
+                        <td>{$setting->id}</td>
+                        <td>{$setting->name}</td>
+                        <td>
+                            <input autocomplete='off' class='form-control' name='setting[{$setting->name}]' type='text'
+                                   value='{$setting->content}'>
+                        </td>
+                    </tr>
+                    {/volist}
+                    <input class='btn btn-primary' name='submit' type='submit' value='保存'>
+                </form>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
