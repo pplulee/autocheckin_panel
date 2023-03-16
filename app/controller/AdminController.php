@@ -72,4 +72,34 @@ class AdminController extends BaseController
         }
         return json(['status' => 'success', 'msg' => '删除成功']);
     }
+
+    public function taskDetail($id)
+    {
+        $task = new Task();
+        $task = $task->fetch($id);
+        if (!$task){
+            return alert("error", "任务不存在", "2000", "/admin/task");
+        }
+        return view('/admin/taskDetail', ['task' => $task]);
+    }
+
+    public function taskUpdate($id)
+    {
+        $data = $this->request->post();
+        $task = new Task();
+        if (!$task->updateTask($id,$data)){
+            return alert("error", "任务不存在", "2000", "/admin/task");
+        }
+        return alert("success", "修改成功", "2000", "/admin/task");
+    }
+
+    public function taskDelete($id)
+    {
+        // Method: DELETE
+        $task = new Task();
+        if (!$task->deleteTask($id)){
+            return json(['status' => 'error', 'msg' => '任务不存在']);
+        }
+        return json(['status' => 'success', 'msg' => '删除成功']);
+    }
 }

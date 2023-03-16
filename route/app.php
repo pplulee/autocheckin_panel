@@ -40,5 +40,8 @@ Route::group('admin', function () {
     Route::get('user/:id', 'admin/userDetail');
     Route::post('user/:id', 'admin/userUpdate');
     Route::get('user', 'admin/user');
+    Route::delete('task/:id', 'admin/taskDelete');
+    Route::get('task/:id', 'admin/taskDetail');
+    Route::post('task/:id', 'admin/taskUpdate');
     Route::get('task', 'admin/task');
 })->middleware(Admin::class);
