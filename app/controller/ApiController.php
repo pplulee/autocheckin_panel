@@ -20,7 +20,7 @@ class ApiController extends BaseController
 
     public function get_param(): Json
     {
-        if ($this->request->post("key")) {
+        if ($this->request->post("task_id")) {
             $task = new Task();
             if ($task->checkTaskExist($this->request->post("task_id"))) {
                 $task = $task->fetch($this->request->post("task_id"));

@@ -3,10 +3,10 @@ declare (strict_types=1);
 
 namespace app\middleware;
 
+use app\model\Setting;
 use Closure;
 use think\Request;
 use think\Response\Json;
-use app\model\Setting;
 
 class Api
 {
@@ -22,18 +22,16 @@ class Api
         if (!$request->isPost()) {
             return json(["code" => 403, "msg" => "请求方式错误"]);
         }
-        $headers = $request->header();
-        foreach ($headers as $k => $value) {
-            if ($k == "key") {
-                $key = $value;
-                $setting = new Setting();
-                $web_key = $setting->getSetting("web_key");
-                if ($key == $web_key) {
-                    return $next($request);
-                }
-                return json(["code" => 403, "msg" => "key错误"]);
-            }
+        $key = $request->header('key');
+        if (!$key || $key == "") {
+            return json(["code" => 403, "msg" => "缺少key"]);
         }
-        return json(["code" => 403, "msg" => "缺少key"]);
+        $setting = new Setting();
+        $web_key = $setting->getSetting("web_key");
+        if ($key != $web_key) {
+            return json(["code" => 403, "msg" => "key错误"]);
+        } else {
+            return $next($request);
+        }
     }
 }
