@@ -19,6 +19,11 @@ class Task extends Model
         return $task;
     }
 
+    public function fetchAll()
+    {
+        return $this->select();
+    }
+
     public function numOfTasks()
     {
         return $this->count();
@@ -74,5 +79,14 @@ class Task extends Model
             $task->delete();
         }
         return true;
+    }
+
+    public function checkTaskExist($id): bool
+    {
+        $task = $this->fetch($id);
+        if ($task) {
+            return true;
+        }
+        return false;
     }
 }

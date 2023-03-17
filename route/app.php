@@ -12,6 +12,7 @@ use app\middleware\Admin;
 use app\middleware\Auth;
 use app\middleware\Task;
 use app\middleware\UserIndex;
+use app\middleware\Api;
 use think\facade\Route;
 
 
@@ -47,3 +48,9 @@ Route::group('admin', function () {
     Route::get('setting', 'admin/settingDetail');
     Route::post('setting', 'admin/settingUpdate');
 })->middleware(Admin::class);
+
+// 注册api
+Route::group('api', function () {
+    Route::rule('get_list', 'api/get_list');
+    Route::rule('get_param', 'api/get_param');
+})->middleware(Api::class);
