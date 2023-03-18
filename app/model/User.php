@@ -37,7 +37,7 @@ class User extends Model
         }
         $user = new User();
         $password = password_hash($password, PASSWORD_DEFAULT);
-        $user->save(['email' => $email, 'password' => $password]);
+        $user->create(['email' => $email, 'password' => $password]);
         return $user;
     }
 

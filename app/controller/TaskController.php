@@ -29,8 +29,12 @@ class TaskController extends BaseController
             'tgbot_token' => $this->request->post('tgbot_token'),
             'wxpusher_uid' => $this->request->post('wxpusher_uid'),
             'userid' => Session::get('user_id')]);
-        app()->taskService->backendSetTask($id);
-        return alert("success", "修改成功", "2000", "/user/index");
+        $backendResult = app()->taskService->backendSetTask($id);
+        if ($backendResult['status'] == 'success') {
+            return alert("success", "修改成功", "2000", "/user/index");
+        } else {
+            return alert("info", "任务已添加，但后端响应错误:{$backendResult['msg']}", "2000", "/user/index");
+        }
     }
 
     public function delete(): string
@@ -41,19 +45,24 @@ class TaskController extends BaseController
             return alert("error", "任务不存在", "2000", "/user/index");
         } else {
             $task->delete();
-            return alert("success", "删除成功", "2000", "/user/index");
+            $backendResult = app()->taskService->backendRemoveTask($task->id);
+            if ($backendResult['status'] == 'success') {
+                return alert("success", "删除成功", "2000", "/user/index");
+            } else {
+                return alert("info", "任务已删除，但后端响应错误:{$backendResult['msg']}", "2000", "/user/index");
+            }
         }
     }
 
-    public function add(): string
-    {
-        $task = new Task();
-        $id = $task->addTask(Session::get('id'), ['username' => $this->request->post('username'),
-            'password' => $this->request->post('password'),
-            'tgbot_chat_id' => $this->request->post('tgbot_chat_id'),
-            'tgbot_token' => $this->request->post('tgbot_token'),
-            'wxpusher_uid' => $this->request->post('wxpusher_uid'),
-            'userid' => Session::get('user_id')]);
-        return alert("success", "添加成功", "2000", "/user/index");
-    }
+//    public function add(): string
+//    {
+//        $task = new Task();
+//        $id = $task->addTask(Session::get('id'), ['username' => $this->request->post('username'),
+//            'password' => $this->request->post('password'),
+//            'tgbot_chat_id' => $this->request->post('tgbot_chat_id'),
+//            'tgbot_token' => $this->request->post('tgbot_token'),
+//            'wxpusher_uid' => $this->request->post('wxpusher_uid'),
+//            'userid' => Session::get('user_id')]);
+//        return alert("success", "添加成功", "2000", "/user/index");
+//    }
 }

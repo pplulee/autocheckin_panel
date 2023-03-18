@@ -63,14 +63,12 @@ class Task extends Model
         $tgbot_token = $data['tgbot_token'];
         $wxpusher_uid = $data['wxpusher_uid'];
         $userid = $data['userid'];
-        $task->save(['username' => $username,
+        $task = $task->create(['username' => $username,
             'password' => $password,
             'tgbot_chat_id' => $tgbot_chat_id,
             'tgbot_token' => $tgbot_token,
             'wxpusher_uid' => $wxpusher_uid,
             'userid' => $userid]);
-        # 返回自增ID
-        $task->id = $task->getLastInsID();
         return $task->id;
     }
 
