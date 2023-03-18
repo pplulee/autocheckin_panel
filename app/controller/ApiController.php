@@ -14,8 +14,8 @@ class ApiController extends BaseController
     public function get_list(): Json
     {
         $task = new Task();
-        $userList = $task->fetchAll();
-        return json(["code"=>200,"msg"=>"ok","data"=>$userList]);
+        $taskList = $task->fetchAllId();
+        return json(["code"=>200,"msg"=>"ok","data"=>$taskList]);
     }
 
     public function get_param(): Json

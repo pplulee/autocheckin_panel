@@ -13,9 +13,9 @@ class Task extends Model
     protected $table = 'tasks';
     protected $pk = 'id';
 
-    public function fetchAll()
+    public function fetchAllId()
     {
-        return $this->select();
+        return $this->column('id');
     }
 
     public function numOfTasks()
