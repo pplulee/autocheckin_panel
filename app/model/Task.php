@@ -13,12 +13,6 @@ class Task extends Model
     protected $table = 'tasks';
     protected $pk = 'id';
 
-    public function fetch($id)
-    {
-        $task = $this->where('id', $id)->find();
-        return $task;
-    }
-
     public function fetchAll()
     {
         return $this->select();
@@ -44,7 +38,23 @@ class Task extends Model
         return $task;
     }
 
-    public function add($data): bool
+    public function updateTask($id, $data): int
+    {
+        $task = $this->fetch($id);
+        if ($task) {
+            $task->delete();
+        }
+        $new_id = $this->add($data);
+        return $new_id;
+    }
+
+    public function fetch($id)
+    {
+        $task = $this->where('id', $id)->find();
+        return $task;
+    }
+
+    public function add($data): int
     {
         $task = new Task();
         $username = $data['username'];
@@ -59,17 +69,9 @@ class Task extends Model
             'tgbot_token' => $tgbot_token,
             'wxpusher_uid' => $wxpusher_uid,
             'userid' => $userid]);
-        return true;
-    }
-
-    public function updateTask($id, $data): bool
-    {
-        $task = $this->fetch($id);
-        if ($task) {
-            $task->delete();
-        }
-        $this->add($data);
-        return true;
+        # 返回自增ID
+        $task->id = $task->getLastInsID();
+        return $task->id;
     }
 
     public function deleteTask($id): bool
